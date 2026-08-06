@@ -25,8 +25,7 @@ class RegisterController extends Controller
     {
         $validated = $request->validate([
             'name'     => ['required', 'string', 'max:100'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:User,Email'],            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ], [
             'name.required'     => 'Vui lòng nhập họ tên.',
             'email.required'    => 'Vui lòng nhập email.',
@@ -38,10 +37,12 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create([
-            'name'     => $validated['name'],
-            'email'    => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
+    'Username'     => $validated['name'],
+    'Email'        => $validated['email'],
+    'PasswordHash' => Hash::make($validated['password']),
+    'RoleID'       => 4,   // nếu Customer có RoleID = 4
+    'IsActive'     => 1,
+]);
 
         Auth::login($user);
 
