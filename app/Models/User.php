@@ -18,11 +18,21 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+   protected $table = 'User';
+
+protected $primaryKey = 'UserID';
+
+public $timestamps = false;
+
+protected $fillable = [
+    'Username',
+    'PasswordHash',
+    'Email',
+    'Phone',
+    'RoleID',
+    'IsActive',
+    'DateBirth',
+];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -30,10 +40,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    'PasswordHash',
+];
 
+public function getAuthPassword()
+{
+    return $this->PasswordHash;
+}
     /**
      * Get the attributes that should be cast.
      *

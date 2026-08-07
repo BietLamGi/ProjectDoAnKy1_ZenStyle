@@ -24,3 +24,4 @@
 @endif
 
 @stack('scripts')
+
