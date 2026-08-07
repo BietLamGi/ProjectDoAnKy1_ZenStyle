@@ -27,13 +27,13 @@ class RegisterController extends Controller
             'name'     => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:User,Email'],            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ], [
-            'name.required'     => 'Vui lòng nhập họ tên.',
-            'email.required'    => 'Vui lòng nhập email.',
-            'email.email'       => 'Email không đúng định dạng.',
-            'email.unique'      => 'Email này đã được đăng ký.',
-            'password.required' => 'Vui lòng nhập mật khẩu.',
-            'password.min'      => 'Mật khẩu tối thiểu 6 ký tự.',
-            'password.confirmed'=> 'Xác nhận mật khẩu không khớp.',
+            'name.required'     => 'Please enter your full name.',
+            'email.required'    => 'Please enter your email.',
+            'email.email'       => 'The email adress is invalid.',
+            'email.unique'      => 'This email is already registered.',
+            'password.required' => 'Please enter your password.',
+            'password.min'      => 'Password must be at least 6 characters long.',
+            'password.confirmed'=> 'Password do not match.',
         ]);
 
         $user = User::create([
@@ -47,6 +47,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         return redirect()->route('home')
-            ->with('success', 'Đăng ký tài khoản thành công! Chào mừng bạn đến với ZenStyle.');
+            ->with('success', 'Account created successfully! Welcome to ZenStyle.');
     }
 }

@@ -19,9 +19,9 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
         ], [
-            'email.required' => 'Vui lòng nhập email.',
-            'email.email' => 'Email không đúng định dạng.',
-            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'email.required' => 'Please enter your email.',
+            'email.email' => 'Email not recognized.',
+            'password.required' => 'Please enter your password.',
         ]);
 
         $loggedIn = Auth::attempt([
@@ -33,14 +33,14 @@ class LoginController extends Controller
         if (!$loggedIn) {
             return back()
                 ->withInput($request->only('email'))
-                ->with('error', 'Email hoặc mật khẩu không đúng.');
+                ->with('error', 'Email or password is incorrect.');
         }
 
         $request->session()->regenerate();
 
         return redirect()
             ->route('home')
-            ->with('success', 'Đăng nhập thành công.');
+            ->with('success', 'Login successful.');
     }
 
     public function destroy(Request $request)

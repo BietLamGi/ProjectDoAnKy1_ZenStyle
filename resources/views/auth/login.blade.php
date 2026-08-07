@@ -1,6 +1,6 @@
 @extends('layouts.app.app')
 
-@section('title', 'Đăng nhập tài khoản - ZenStyle')
+@section('title', 'Sign in to your account - ZenStyle')
 
 @section('content')
 
@@ -14,14 +14,14 @@
                 <p class="breadcrumbs">
                     <span class="mr-2">
                         <a href="{{ route('home') }}">
-                            Trang chủ <i class="ion-ios-arrow-forward"></i>
+                            Home <i class="ion-ios-arrow-forward"></i>
                         </a>
                     </span>
 
-                    <span>Đăng nhập</span>
+                    <span>Log in</span>
                 </p>
 
-                <h1 class="mb-0 bread">Đăng Nhập Tài Khoản</h1>
+                <h1 class="mb-0 bread">Log in your account</h1>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
                             type="password"
                             name="password"
                             class="form-control"
-                            placeholder="Mật khẩu *"
+                            placeholder="Password *"
                             autocomplete="current-password"
                             style="border:1px solid #e6e6e6 !important; color:#000 !important;"
                         >
@@ -85,14 +85,14 @@
 
                     <div class="form-group mb-3 text-center">
     <button type="submit" class="btn btn-primary py-3 px-5">
-        Đăng nhập
+        LOG IN
     </button>
 </div>
                     <div class="text-center">
-                        <span>Chưa có tài khoản?</span>
+                        <span>Don't have an account?</span>
 
                         <a href="{{ route('register') }}">
-                            Đăng ký ngay
+                            Sign up.
                         </a>
                     </div>
 
