@@ -1,0 +1,216 @@
+/* ===========================
+        BOOKING PAGE
+=========================== */
+
+.booking-container{
+    max-width:850px;
+    margin:70px auto;
+    padding:50px;
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.booking-header{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.booking-header h2{
+    font-size:40px;
+    font-weight:700;
+    color:#222;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.booking-header p{
+    color:#9d9d9d;
+    font-size:17px;
+}
+
+.booking-field{
+    margin-bottom:28px;
+}
+
+.booking-field label{
+    display:block;
+    font-weight:600;
+    margin-bottom:10px;
+    color:#444;
+}
+
+.booking-field input,
+.booking-field select,
+.booking-field textarea{
+
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:14px;
+    padding:15px 18px;
+    font-size:15px;
+    transition:.3s;
+    background:#fafafa;
+
+}
+
+.booking-field input:focus,
+.booking-field select:focus,
+.booking-field textarea:focus{
+
+    outline:none;
+    border-color:#c89b5b;
+    background:white;
+    box-shadow:0 0 0 4px rgba(200,155,91,.15);
+
+}
+
+.booking-field textarea{
+
+    resize:none;
+
+}
+
+.booking-field small{
+
+    color:#dc3545;
+    margin-top:8px;
+    display:block;
+
+}
+
+/*==========================
+        TIME SLOT
+===========================*/
+
+.time-options{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+
+}
+
+.time-item{
+
+    cursor:pointer;
+
+}
+
+.time-item input{
+
+    display:none;
+
+}
+
+.time-item span{
+
+    display:block;
+
+    text-align:center;
+
+    padding:18px 0;
+
+    border-radius:14px;
+
+    background:#f5f5f5;
+
+    border:2px solid transparent;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.time-item span:hover{
+
+    background:#efe5d5;
+
+}
+
+.time-item input:checked + span{
+
+    background:#c89b5b;
+
+    color:#fff;
+
+    border-color:#c89b5b;
+
+}
+
+/*==========================
+        BUTTON
+===========================*/
+
+.booking-submit{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#c89b5b;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    letter-spacing:1px;
+
+    transition:.3s;
+
+}
+
+.booking-submit:hover{
+
+    background:#b68546;
+
+    transform:translateY(-2px);
+
+}
+
+/*==========================
+        ERROR
+===========================*/
+
+.input-error{
+
+    border:1px solid #dc3545 !important;
+
+}
+
+/*==========================
+        MOBILE
+===========================*/
+
+@media(max-width:768px){
+
+.booking-container{
+
+    padding:30px 20px;
+
+    margin:30px 15px;
+
+}
+
+.booking-header h2{
+
+    font-size:30px;
+
+}
+
+.time-options{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+}

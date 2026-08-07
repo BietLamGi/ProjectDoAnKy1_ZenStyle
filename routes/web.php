@@ -35,20 +35,21 @@ Route::prefix('admin')->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // xlý submit form đặt lịch booking
+Route::get('/booking', [AppointmentController::class, 'create'])->name('booking');
+
 Route::post('/booking', [AppointmentController::class, 'store'])->name('booking.store');
 
-// Truy cập trực tiếp /booking (GET) sẽ đưa thẳng về section đặt lịch trên trang chủ
-Route::get('/booking', function () {
-    return redirect(route('home') . '#booking');
-});
+// book xong chuyển qua success page
+Route::get('/booking/success/{id}', [AppointmentController::class, 'success'])->name('booking.success');
+
+
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+
 
 Route::get('/about', function () {
     return redirect(route('home') . '#about');
 })->name('about');
-
-Route::get('/services', function () {
-    return redirect(route('home') . '#services');
-})->name('services');
 
 Route::get('/contact', function () {
     return redirect(route('home') . '#contact');

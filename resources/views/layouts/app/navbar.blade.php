@@ -18,38 +18,38 @@
 
                 <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                     <a href="{{ request()->routeIs('home') ? '#home' : route('home') }}" class="nav-link">
-                        Trang chủ
+                        Home
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" class="nav-link">
-                        Giới thiệu
+                        About Us
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="nav-link">
-                        Dịch vụ
+                        Services
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" class="nav-link">
-                        Liên hệ
+                        Contact
                     </a>
                 </li>
 
                 <li class="nav-item ml-lg-2">
-                    <a href="{{ request()->routeIs('home') ? '#booking' : route('home').'#booking' }}"
-                       class="nav-link btn btn-primary text-white px-3 rounded">
-                        Đặt lịch
+                    <a href="{{ route('booking') }}"
+                    class="nav-link btn btn-primary text-white px-3 rounded">
+                            Book Appointment
                     </a>
                 </li>
 
                 <li class="nav-item {{ request()->routeIs('register') ? 'active' : '' }}">
                     <a href="{{ route('register') }}" class="nav-link">
-                        Đăng ký
+                        Register
                     </a>
                 </li>
 

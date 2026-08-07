@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
+    protected $table = 'Appointment';
+
+    protected $primaryKey = 'AppointmentID';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'fullname',
-        'phone',
-        'service',
-        'appointment_date',
-        'appointment_time',
-        'note',
-        'status',
+        'CustomerID',
+        'StaffID',
+        'AppointmentDate',
+        'StartTime',
+        'EndTime',
+        'Status',
+        'Notes',
     ];
 }

@@ -8,8 +8,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $services = Service::salonServices();
-
-        return view('home.index', compact('services'));
+        return view('home.index');
     }
 }

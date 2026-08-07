@@ -13,8 +13,8 @@
                     <h2 class="ftco-heading-2">ZenStyle</h2>
 
                     <p>
-                        Salon tóc &amp; spa chăm sóc sắc đẹp - không gian thư giãn, dịch vụ tận tâm,
-                        đồng hành cùng vẻ đẹp của bạn mỗi ngày.
+                        Hair salon &amp; beauty spa - a relaxing space with dedicated service, 
+                        accompanying your beauty every day.
                     </p>
 
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
@@ -37,36 +37,36 @@
 
             </div>
 
-            <!-- Dịch vụ nổi bật -->
+            <!-- Featured Services -->
             <div class="col-md-4">
 
                 <div class="ftco-footer-widget mb-4">
 
-                    <h2 class="ftco-heading-2">Dịch Vụ Nổi Bật</h2>
+                    <h2 class="ftco-heading-2">Featured Services</h2>
 
                     <ul class="list-unstyled">
 
                         <li>
                             <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="py-2 d-block">
-                                Cắt tóc tạo kiểu
+                                Haircut &amp; Styling
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="py-2 d-block">
-                                Nhuộm / Uốn tóc
+                                Hair Coloring &amp; Perming
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="py-2 d-block">
-                                Chăm sóc da mặt
+                                Facial Care
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="py-2 d-block">
-                                Massage thư giãn
+                                Relaxing Massage
                             </a>
                         </li>
 
@@ -76,42 +76,42 @@
 
             </div>
 
-            <!-- Liên kết nhanh -->
+            <!-- Quick Links -->
             <div class="col-md-2">
 
                 <div class="ftco-footer-widget mb-4 ml-md-4">
 
-                    <h2 class="ftco-heading-2">Liên Kết</h2>
+                    <h2 class="ftco-heading-2">Quick Links</h2>
 
                     <ul class="list-unstyled">
 
                         <li>
                             <a href="{{ route('home') }}" class="py-2 d-block">
-                                Trang chủ
+                                Home
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" class="py-2 d-block">
-                                Giới thiệu
+                                About Us
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="py-2 d-block">
-                                Dịch vụ
+                                Services
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ request()->routeIs('home') ? '#booking' : route('home').'#booking' }}" class="py-2 d-block">
-                                Đặt lịch
+                                Book Appointment
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('register') }}" class="py-2 d-block">
-                                Đăng ký
+                                Register
                             </a>
                         </li>
 
@@ -127,7 +127,7 @@
                 <div class="ftco-footer-widget mb-4">
 
                     <h2 class="ftco-heading-2">
-                        Liên Hệ
+                        Contact Us
                     </h2>
 
                     <div class="block-23 mb-3">
@@ -138,8 +138,8 @@
                                 <span class="icon icon-map-marker"></span>
 
                                 <span class="text">
-                                    123 Đường Nguyễn Huệ, Quận 1,
-                                    TP. Hồ Chí Minh, Việt Nam
+                                    123 Nguyen Hue Street, District 1,
+                                    Ho Chi Minh City, Vietnam
                                 </span>
                             </li>
 

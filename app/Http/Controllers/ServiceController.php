@@ -12,7 +12,40 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        
+    $hairServices = Service::where('ServiceType',0)
+        ->where('Category','Hair')
+        ->get();
+
+    $skinServices = Service::where('ServiceType',0)
+        ->where('Category','Skin')
+        ->get();
+
+    $massageServices = Service::where('ServiceType',0)
+        ->where('Category','Massage')
+        ->get();
+
+    // Products
+    $hairProducts = Service::where('ServiceType',1)
+        ->where('Category','Hair')
+        ->get();
+
+    $skinProducts = Service::where('ServiceType',1)
+        ->where('Category','Skin')
+        ->get();
+
+    $massageProducts = Service::where('ServiceType',1)
+        ->where('Category','Massage')
+        ->get();
+
+    return view('service.index', compact(
+        'hairServices',
+        'skinServices',
+        'massageServices',
+        'hairProducts',
+        'skinProducts',
+        'massageProducts'
+    ));
     }
 
     /**

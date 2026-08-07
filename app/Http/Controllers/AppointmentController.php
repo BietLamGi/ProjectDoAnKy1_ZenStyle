@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\AppointmentService;
+use App\Models\Customer;
 use App\Models\Service;
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -22,6 +26,12 @@ class AppointmentController extends Controller
     public function create()
     {
         //
+         $services = Service::where('ServiceType',0)
+                ->where('IsActive',1)
+                ->orderBy('Category')
+                ->get();
+
+    return view('booking.index',compact('services'));
     }
 
     /**
@@ -29,31 +39,107 @@ class AppointmentController extends Controller
      * Xử lý dữ liệu gửi lên từ form đặt lịch ở trang chủ (#booking).
      */
     public function store(Request $request)
-    {
-        $services = Service::salonServices();
+  {
+        $request->validate([
 
-        $validated = $request->validate([
-            'fullname'          => ['required', 'string', 'max:100'],
-            'phone'             => ['required', 'regex:/^[0-9+\-\s]{9,15}$/'],
-            'service'           => ['required', 'in:' . implode(',', array_keys($services))],
-            'appointment_date'  => ['nullable', 'date', 'after_or_equal:today'],
-            'appointment_time'  => ['nullable', 'string', 'max:20'],
-            'note'              => ['nullable', 'string', 'max:500'],
-        ], [
-            'fullname.required'            => 'Vui lòng nhập họ và tên.',
-            'phone.required'               => 'Vui lòng nhập số điện thoại.',
-            'phone.regex'                  => 'Số điện thoại không hợp lệ.',
-            'service.required'             => 'Vui lòng chọn dịch vụ bạn muốn đặt.',
-            'service.in'                   => 'Dịch vụ được chọn không hợp lệ.',
-            'appointment_date.after_or_equal' => 'Ngày hẹn phải từ hôm nay trở đi.',
+        'fullname' => 'required|max:100',
+
+        'phone' => 'required|max:20',
+
+        'service' => 'required|exists:Service,ServiceID',
+
+        'appointment_date' => 'required|date',
+
+        'appointment_time' => 'required',
+
+        'note' => 'nullable|max:500'
+
+    ]);
+
+    $customer = Customer::where('Phone', $request->phone)->first();
+
+    if (!$customer) {
+
+        $customer = Customer::create([
+
+            'FullName' => $request->fullname,
+
+            'Phone' => $request->phone,
+
+            'Email' => null,
+
+            'DOB' => null,
+
+            'Allergies' => null,
+
+            'Notes' => null,
+
+            'LoyaltyPoints' => 0,
+
+            'MembershipTier' => 'Normal',
+
         ]);
+    }
 
-        $validated['status'] = 'pending';
+    $service = Service::findOrFail($request->service);
 
-        Appointment::create($validated);
+    $start = Carbon::parse($request->appointment_time);
 
-        return redirect(route('home') . '#booking')
-            ->with('success', 'Đặt lịch thành công! Chúng tôi sẽ liên hệ xác nhận với bạn trong thời gian sớm nhất.');
+    $end = $start->copy()->addMinutes((int)($service->DurationMinutes));
+
+    $exists = Appointment::where('CustomerID', $customer->CustomerID)
+    ->where('AppointmentDate', $request->appointment_date)
+    ->where('StartTime', $start->format('H:i:s'))
+    ->whereIn('Status', ['Pending', 'Confirmed'])
+    ->exists();
+
+    if ($exists) {
+        return back()
+            ->withInput()
+            ->with('error', 'You already have an appointment at this time.');
+    }
+
+    $appointment = Appointment::create([
+
+        'CustomerID' => $customer->CustomerID,
+
+        'StaffID' => null,
+
+        'AppointmentDate' => $request->appointment_date,
+
+        'StartTime' => $start->format('H:i:s'),
+
+        'EndTime' => $end->format('H:i:s'),
+
+        'Status' => 'Pending',
+
+        'Notes' => $request->note,
+
+    ]);
+
+    AppointmentService::create([
+
+        'AppointmentID' => $appointment->AppointmentID,
+
+        'ServiceID' => $service->ServiceID,
+
+        'Quantity' => 1,
+
+        'UnitPrice' => $service->Price,
+
+    ]);
+
+
+
+    return redirect()
+            ->route('booking.success',  $appointment->AppointmentID);
+    }
+
+    public function success($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+
+        return view('booking.success', compact('appointment'));
     }
 
     /**

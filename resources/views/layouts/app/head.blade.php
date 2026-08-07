@@ -25,4 +25,6 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/icomoon.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
 
+@yield('styles')
+
 @stack('styles')
