@@ -3,6 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Receptionist\DashboardController as ReceptionistDashboardController;
+use App\Http\Controllers\Receptionist\CustomerController as ReceptionistCustomerController;
+use App\Http\Controllers\Receptionist\AppointmentController as ReceptionistAppointmentController;
+use App\Http\Controllers\Receptionist\OrderController as ReceptionistOrderController;
+use App\Http\Controllers\Receptionist\ServiceController as ReceptionistServiceController;
+use App\Http\Controllers\Receptionist\FeedbackController as ReceptionistFeedbackController;
+use App\Http\Controllers\Receptionist\NotificationController as ReceptionistNotificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ServiceController;
@@ -62,3 +69,37 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+// Receptionist - khu vực nghiệp vụ lễ tân
+Route::prefix('receptionist')->name('receptionist.')->group(function () {
+
+    Route::get('/', [ReceptionistDashboardController::class, 'index'])->name('dashboard');
+
+    // Quản lý khách hàng
+    Route::resource('customers', ReceptionistCustomerController::class);
+
+    // Quản lý lịch hẹn (đặt lịch tại quầy, xác nhận, check-in, hoàn tất, huỷ)
+    Route::resource('appointments', ReceptionistAppointmentController::class);
+    Route::patch('appointments/{appointment}/status', [ReceptionistAppointmentController::class, 'updateStatus'])
+        ->name('appointments.status');
+
+    // Lập hoá đơn thanh toán dịch vụ/sản phẩm
+    Route::resource('orders', ReceptionistOrderController::class)->only(['index', 'create', 'store', 'show']);
+    Route::patch('orders/{order}/mark-paid', [ReceptionistOrderController::class, 'markPaid'])
+        ->name('orders.mark-paid');
+
+    // Bảng giá dịch vụ / sản phẩm (tra cứu)
+    Route::get('services', [ReceptionistServiceController::class, 'index'])->name('services.index');
+
+    // Phản hồi khách hàng
+    Route::get('feedbacks', [ReceptionistFeedbackController::class, 'index'])->name('feedbacks.index');
+    Route::patch('feedbacks/{feedback}/status', [ReceptionistFeedbackController::class, 'updateStatus'])
+        ->name('feedbacks.status');
+
+    // Thông báo nội bộ
+    Route::get('notifications', [ReceptionistNotificationController::class, 'index'])->name('notifications.index');
+    Route::patch('notifications/{notification}/read', [ReceptionistNotificationController::class, 'markRead'])
+        ->name('notifications.read');
+    Route::patch('notifications/read-all', [ReceptionistNotificationController::class, 'markAllRead'])
+        ->name('notifications.read-all');
+});
