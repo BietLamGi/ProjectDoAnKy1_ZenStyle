@@ -18,9 +18,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-   protected $table = 'User';
-
-protected $primaryKey = 'UserID';
+  protected $table = 'users';
+protected $primaryKey = 'id';
 
 public $timestamps = false;
 

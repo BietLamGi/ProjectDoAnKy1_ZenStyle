@@ -7,7 +7,7 @@ use App\Models\AppointmentService;
 
 class Appointment extends Model
 {
-    protected $table = 'Appointment';
+    protected $table = 'appointments';
 
     protected $primaryKey = 'AppointmentID';
 
@@ -22,13 +22,25 @@ class Appointment extends Model
         'Status',
         'Notes',
     ];
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 
+        'CustomerID',
+         'CustomerID');
+    }
+    // reception
+    public function staff()
+    {
+        return $this->belongsTo(User::class, 'StaffID', 'id');
+    }
 
     public function services()
-{
-    return $this->hasMany(
-        AppointmentService::class,
-        'AppointmentID',
-        'AppointmentID'
-    );
-}
+    {
+        return $this->hasMany(AppointmentService::class, 'AppointmentID', 'AppointmentID');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'appointment_id', 'AppointmentID');
+    }
 }
