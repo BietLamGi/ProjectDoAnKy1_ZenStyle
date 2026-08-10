@@ -183,7 +183,7 @@ Choose your favorite beauty service.
 <div class="home-image">
 
 <img
-src="{{ asset('frontend/images/hair.jpg') }}"
+src="{{ asset('frontend/images/hot-hair.png') }}"
 alt="Hair">
 
 </div>
@@ -231,7 +231,7 @@ View Services
 <div class="home-image">
 
 <img
-src="{{ asset('frontend/images/skin.jpg') }}"
+src="{{ asset('frontend/images/hot-skin.jpg') }}"
 alt="Skin">
 
 </div>
@@ -279,7 +279,7 @@ View Services
 <div class="home-image">
 
 <img
-src="{{ asset('frontend/images/massage.jpg') }}"
+src="{{ asset('frontend/images/hot-spa.jpg') }}"
 alt="Massage">
 
 </div>

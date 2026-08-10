@@ -3,11 +3,19 @@
 @section('title', 'Book Appointment')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('frontend/css/booking.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('frontend/css/booking.css') }}">
 @endsection
+
+@section('content')
 
 <!-- ============ BOOKING ============ -->
 <section id="booking" class="booking-section">
+    <div class="booking-back">
+    <a href="{{ route('home') }}">
+        <i class="icon-arrow-left"></i>
+    </a>
+</div>
 
     <div class="booking-container">
 
@@ -17,15 +25,38 @@
             <p>Relax • Refresh • Renew</p>
         </div>
 
-         @if(session('error'))
-
-        <div class="alert alert-danger">
-
-            {{ session('error') }}
-
+         {{-- SUCCESS --}}
+    @if(session('success'))
+        <div class="booking-success">
+            <i class="icon-check"></i>
+            <span>{{ session('success') }}</span>
         </div>
+    @endif
 
-        @endif
+
+    {{-- ERROR --}}
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
+    {{-- VALIDATION ERRORS --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+<form class="booking-form"
+      method="POST"
+      action="{{ route('booking.store') }}">
+    @csrf
 
         <form class="booking-form"
               method="POST"
@@ -34,32 +65,35 @@
 
             <!-- Full Name -->
             <div class="booking-field">
-                <label>Full Name</label>
-                <input type="text"
-                       name="fullname"
-                       value="{{ old('fullname') }}"
-                       class="@error('fullname') input-error @enderror"
-                       placeholder="Enter your full name">
+    <label>Full Name</label>
 
-                @error('fullname')
-                    <small>{{ $message }}</small>
-                @enderror
-            </div>
+    <input type="text"
+           name="fullname"
+           value="{{ old('fullname', Auth::check() ? Auth::user()->Username : '') }}"
+           class="@error('fullname') input-error @enderror"
+           placeholder="Enter your full name"
+           {{ Auth::check() ? 'readonly' : '' }}>
+
+    @error('fullname')
+        <small>{{ $message }}</small>
+    @enderror
+</div>
 
             <!-- Phone -->
             <div class="booking-field">
-                <label>Phone Number</label>
+    <label>Phone Number</label>
 
-                <input
-                    type="text"
-                    name="phone"
-                    value="{{ old('phone') }}"
-                    placeholder="Enter your phone number">
+    <input
+        type="text"
+        name="phone"
+        value="{{ old('phone', $customer?->Phone) }}"
+        placeholder="Enter your phone number"
+        {{ Auth::check() && $customer ? 'readonly' : '' }}>
 
-                @error('phone')
-                    <small>{{ $message }}</small>
-                @enderror
-            </div>
+    @error('phone')
+        <small>{{ $message }}</small>
+    @enderror
+</div>
 
             <!-- Service -->
             <div class="row">
@@ -79,14 +113,14 @@
                 @foreach($services as $service)
 
                     <option
-                        value="{{ $service->ServiceID }}"
-                        {{ old('service')==$service->ServiceID?'selected':'' }}>
+    value="{{ $service->ServiceID }}"
+    {{ old('service', $selectedService) == $service->ServiceID ? 'selected' : '' }}>
 
-                        {{ $service->Category }}
-                        -
-                        {{ $service->ServiceName }}
+    {{ $service->Category }}
+    -
+    {{ $service->ServiceName }}
 
-                    </option>
+</option>
 
                 @endforeach
 
@@ -156,3 +190,5 @@
     </div>
 
 </section>
+
+@endsection

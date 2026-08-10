@@ -29,7 +29,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="nav-link">
+                    <a href="{{ route('services') }}" class="nav-link">
                         Services
                     </a>
                 </li>
@@ -47,11 +47,102 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ request()->routeIs('register') ? 'active' : '' }}">
+                <!-- CART
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-cart">
+                        <i class="bi bi-cart3"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li> -->
+
+                <!-- <li class="nav-item cart-nav-item">
+    <a href="{{ route('cart.index') }}" class="nav-link cart-link">
+
+        <i class="icon-shopping-cart"></i>
+
+        <span class="cart-count">
+            0
+        </span>
+
+    </a>
+</li> -->
+
+{{-- CART --}}
+@php
+    $cart = session('cart', []);
+    $cartCount = collect($cart)->sum('quantity');
+@endphp
+
+<li class="nav-item cart-nav-item">
+
+    <a href="{{ route('cart.index') }}" class="nav-link cart-link">
+
+        <i class="icon-shopping-cart"></i>
+
+        @if($cartCount > 0)
+            <span class="cart-count">
+                {{ $cartCount }}
+            </span>
+        @endif
+
+    </a>
+
+</li>
+
+                <!-- <li class="nav-item {{ request()->routeIs('register') ? 'active' : '' }}">
                     <a href="{{ route('register') }}" class="nav-link">
                         Register
                     </a>
+                </li> -->
+
+                @guest
+
+<li class="nav-item">
+    <a href="{{ route('login') }}" class="nav-link">
+        Login
+    </a>
+</li>
+
+@endguest
+
+            @auth
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown">
+
+                        <span class="icon-user"></span>
+
+                        {{ Auth::user()->Username }}
+
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                        <a class="dropdown-item" href="{{ route('profile') }}">
+                         My Profile
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <form method="POST"
+                            action="{{ route('logout') }}">
+                            @csrf
+
+                            <button class="dropdown-item">
+                                Logout
+                            </button>
+                        </form>
+
+                    </div>
+
                 </li>
+
+            @endauth
 
             </ul>
 

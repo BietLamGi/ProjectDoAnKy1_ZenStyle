@@ -14,6 +14,8 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 
 Route::prefix('admin')->group(function () {
 
@@ -37,7 +39,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // xlý submit form đặt lịch booking
 Route::get('/booking', [AppointmentController::class, 'create'])->name('booking');
-
 Route::post('/booking', [AppointmentController::class, 'store'])->name('booking.store');
 
 // book xong chuyển qua success page
@@ -59,6 +60,41 @@ Route::get('/contact', function () {
 // đky tk
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+// xem tk of mình
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])
+        ->name('profile');
+
+      Route::get('/profile/edit', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::put('/profile/update', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    Route::get('/my-appointments',
+        [AppointmentController::class, 'myAppointments'])
+        ->name('appointments.my');
+
+    Route::get('/my-appointments/{appointment}',
+    [AppointmentController::class, 'showMyAppointment'])
+    ->name('customer.appointments.show');
+
+    Route::post('/my-appointments/{appointment}/cancel',
+    [AppointmentController::class, 'cancel'])
+    ->name('customer.appointments.cancel');
+});
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+// add product into cart
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+// edit quantity of product in cart
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+// remove product from cart
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

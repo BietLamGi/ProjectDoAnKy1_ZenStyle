@@ -70,7 +70,7 @@ alt="{{ $service->ServiceName }}">
 </div>
 
 <a
-href="{{ route('booking') }}"
+href="{{ route('booking', ['service' => $service->ServiceID]) }}"
 class="btn btn-primary book-btn">
 
 Book Now
@@ -142,6 +142,23 @@ alt="{{ $product->ServiceName }}">
 
 </div>
 
+ <form method="POST"
+      action="{{ route('cart.add') }}"
+      class="cart-form">
+
+    @csrf
+
+    <input type="hidden"
+           name="service_id"
+           value="{{ $product->ServiceID }}">
+
+    <button type="submit" class="add-cart-btn">
+        <i class="icon-shopping-cart"></i>
+        Add to Cart
+    </button>
+
+</form>
+
 </div>
 
 </div>
@@ -205,7 +222,7 @@ alt="{{ $service->ServiceName }}">
 </div>
 
 <a
-href="{{ route('booking') }}"
+href="{{ route('booking', ['service' => $service->ServiceID]) }}"
 class="btn btn-primary book-btn">
 
 Book Now
@@ -277,6 +294,23 @@ alt="{{ $product->ServiceName }}">
 
 </div>
 
+<form method="POST"
+      action="{{ route('cart.add') }}"
+      class="cart-form">
+
+    @csrf
+
+    <input type="hidden"
+           name="service_id"
+           value="{{ $product->ServiceID }}">
+
+    <button type="submit" class="add-cart-btn">
+        <i class="icon-shopping-cart"></i>
+        Add to Cart
+    </button>
+
+</form>
+
 </div>
 
 </div>
@@ -341,7 +375,7 @@ alt="{{ $service->ServiceName }}">
 </div>
 
 <a
-href="{{ route('booking') }}"
+href="{{ route('booking', ['service' => $service->ServiceID]) }}"
 class="btn btn-primary book-btn">
 
 Book Now
@@ -412,6 +446,23 @@ alt="{{ $product->ServiceName }}">
 {{ number_format($product->Price) }} VND
 
 </div>
+
+<form method="POST"
+      action="{{ route('cart.add') }}"
+      class="cart-form">
+
+    @csrf
+
+    <input type="hidden"
+           name="service_id"
+           value="{{ $product->ServiceID }}">
+
+    <button type="submit" class="add-cart-btn">
+        <i class="icon-shopping-cart"></i>
+        Add to Cart
+    </button>
+
+</form>
 
 </div>
 

@@ -24,22 +24,14 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0 pl-3">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+
 
                 <form method="POST" action="{{ route('register.store') }}" class="appointment-form">
                     @csrf
 
                     <div class="form-group">
                         <input type="text" name="name" value="{{ old('name') }}"
-                               class="form-control" placeholder="Your fullname *"
+                               class="form-control" placeholder="Fullname *"
                                style="border:1px solid #e6e6e6 !important; color:#000 !important;">
                     </div>
 
@@ -47,6 +39,12 @@
                         <input type="email" name="email" value="{{ old('email') }}"
                                class="form-control" placeholder="Email *"
                                style="border:1px solid #e6e6e6 !important; color:#000 !important;">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="phone" value="{{ old('phone') }}"
+                            class="form-control" placeholder="Phone *"
+                            style="border:1px solid #e6e6e6 !important; color:#000 !important;">
                     </div>
 
                     <div class="form-group">

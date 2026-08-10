@@ -6,7 +6,8 @@
 <title>@yield('title', 'ZenStyle Salon & Spa')</title>
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700" rel="stylesheet">
-
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="{{ asset('frontend/css/open-iconic-bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
 

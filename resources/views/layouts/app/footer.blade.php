@@ -98,13 +98,13 @@
                         </li>
 
                         <li>
-                            <a href="{{ request()->routeIs('home') ? '#services' : route('home').'#services' }}" class="py-2 d-block">
+                            <a href="{{ route('services') }}" class="py-2 d-block">
                                 Services
                             </a>
                         </li>
 
                         <li>
-                            <a href="{{ request()->routeIs('home') ? '#booking' : route('home').'#booking' }}" class="py-2 d-block">
+                            <a href="{{ route('booking') }}" class="py-2 d-block">
                                 Book Appointment
                             </a>
                         </li>

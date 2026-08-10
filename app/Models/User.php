@@ -60,3 +60,4 @@ public function getAuthPassword()
         ];
     }
 }
+

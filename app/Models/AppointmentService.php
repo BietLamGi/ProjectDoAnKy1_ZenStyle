@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Service;
 
 class AppointmentService extends Model
 {
@@ -18,5 +19,14 @@ protected $fillable = [
     'Quantity',
     'UnitPrice',
 ];
+
+public function service()
+{
+    return $this->belongsTo(
+        Service::class,
+        'ServiceID',
+        'ServiceID'
+    );
+}
 }
 

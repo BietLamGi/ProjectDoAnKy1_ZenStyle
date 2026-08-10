@@ -29,11 +29,9 @@
 
         <br>
 
-        <a href="{{ route('home') }}"
+        <a href="{{ route('appointments.my') }}"
            class="btn btn-outline-primary">
-
-            Back Home
-
+            View My Appointments
         </a>
 
     </div>

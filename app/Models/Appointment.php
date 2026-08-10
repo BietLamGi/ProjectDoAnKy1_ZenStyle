@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\AppointmentService;
 
 class Appointment extends Model
 {
@@ -21,4 +22,13 @@ class Appointment extends Model
         'Status',
         'Notes',
     ];
+
+    public function services()
+{
+    return $this->hasMany(
+        AppointmentService::class,
+        'AppointmentID',
+        'AppointmentID'
+    );
+}
 }

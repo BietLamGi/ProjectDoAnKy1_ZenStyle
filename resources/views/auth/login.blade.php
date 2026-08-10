@@ -19,6 +19,14 @@
                     </span>
 
                     <span>Log in</span>
+                    <div class="text-center mt-3">
+    <p>
+        Don't have an account?
+        <a href="{{ route('register') }}">
+            Register
+        </a>
+    </p>
+</div>
                 </p>
 
                 <h1 class="mb-0 bread">Log in your account</h1>

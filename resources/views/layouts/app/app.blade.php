@@ -3,6 +3,7 @@
 
 <head>
     @include('layouts.app.head')
+    @yield('styles')
 </head>
 
 <body>

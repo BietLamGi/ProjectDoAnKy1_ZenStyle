@@ -8,18 +8,19 @@ class Customer extends Model
 {
     protected $table = 'Customer';
 
-protected $primaryKey = 'CustomerID';
+    protected $primaryKey = 'CustomerID';
 
-public $timestamps = false;
+    public $timestamps = false;
 
-protected $fillable = [
-    'FullName',
-    'Phone',
-    'Email',
-    'DOB',
-    'Allergies',
-    'Notes',
-    'LoyaltyPoints',
-    'MembershipTier',
-];
+    protected $fillable = [
+        'UserID',
+        'FullName',
+        'Phone',
+        'Email',
+        'DOB',
+        'Allergies',
+        'Notes',
+        'LoyaltyPoints',
+        'MembershipTier',
+    ];
 }
