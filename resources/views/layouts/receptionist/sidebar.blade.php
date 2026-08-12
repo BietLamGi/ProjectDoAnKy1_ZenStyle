@@ -39,11 +39,25 @@
             <span class="nav-text">Services &amp; Products</span>
         </a>
 
-        <a class="nav-link {{ request()->routeIs('receptionist.orders.*') ? 'active' : '' }}" href="{{ route('receptionist.orders.index') }}">
+        <a class="nav-link {{ request()->routeIs('receptionist.invoices.*') ? 'active' : '' }}" href="{{ route('receptionist.invoices.index') }}">
             <span class="nav-icon">
                 <i class="bi bi-receipt"></i>
             </span>
             <span class="nav-text">Invoices</span>
+        </a>
+
+        <a class="nav-link {{ request()->routeIs('receptionist.promotions.*') ? 'active' : '' }}" href="{{ route('receptionist.promotions.index') }}">
+            <span class="nav-icon">
+                <i class="bi bi-tag"></i>
+            </span>
+            <span class="nav-text">Promotions</span>
+        </a>
+
+        <a class="nav-link {{ request()->routeIs('receptionist.work-schedules.*') ? 'active' : '' }}" href="{{ route('receptionist.work-schedules.index') }}">
+            <span class="nav-icon">
+                <i class="bi bi-calendar-week"></i>
+            </span>
+            <span class="nav-text">Work Schedule</span>
         </a>
 
         <a class="nav-link {{ request()->routeIs('receptionist.feedbacks.*') ? 'active' : '' }}" href="{{ route('receptionist.feedbacks.index') }}">

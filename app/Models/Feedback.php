@@ -6,24 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
-    //
-    protected $table = 'feedback';
+    protected $table = 'Feedback';
+    protected $primaryKey = 'FeedbackID';
+
+    public $timestamps = false;
 
     protected $fillable = [
-        'customer_id',
-        'appointment_id',
-        'rating',
-        'comment',
-        'status',
+        'AppointmentID',
+        'Rating',
+        'Comments',
+        'FeedbackDate',
     ];
 
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class, 'customer_id', 'CustomerID');
-    }
+    protected $casts = [
+        'FeedbackDate' => 'datetime',
+        'Rating' => 'integer',
+    ];
 
     public function appointment()
     {
-        return $this->belongsTo(Appointment::class, 'appointment_id', 'AppointmentID');
+        return $this->belongsTo(
+            Appointment::class,
+            'AppointmentID',
+            'AppointmentID'
+        );
     }
 }

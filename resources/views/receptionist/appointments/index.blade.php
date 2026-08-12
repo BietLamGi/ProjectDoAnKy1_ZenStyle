@@ -1,6 +1,6 @@
 @extends('layouts.receptionist.app')
 
-@section('title', 'Lịch hẹn')
+@section('title', 'Appointments')
 
 @section('content')
 <div class="container-fluid">
@@ -8,12 +8,12 @@
     <div class="page-heading">
         <div>
             <span class="eyebrow">Reception</span>
-            <h1>Lịch hẹn</h1>
-            <p class="text-muted mb-0">Xác nhận, check-in khách và hoàn tất lịch hẹn.</p>
+            <h1>Appointments</h1>
+            <p class="text-muted mb-0">Confirm, check in customers, and complete appointments.</p>
         </div>
         <div class="heading-actions">
             <a href="{{ route('receptionist.appointments.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i> Đặt lịch mới
+                <i class="bi bi-plus-lg"></i> New appointment
             </a>
         </div>
     </div>
@@ -23,31 +23,31 @@
             <form class="d-flex flex-wrap gap-2" method="GET">
                 <input type="date" name="date" value="{{ $date }}" class="form-control" style="max-width: 170px;">
                 <select name="status" class="form-control" style="max-width: 170px;">
-                    <option value="">Tất cả trạng thái</option>
+                    <option value="">All statuses</option>
                     @foreach (\App\Http\Controllers\Receptionist\AppointmentController::STATUSES as $s)
                         <option value="{{ $s }}" @selected($status === $s)>{{ $s }}</option>
                     @endforeach
                 </select>
-                <input type="search" name="q" value="{{ $keyword }}" class="form-control table-search" placeholder="Tên hoặc SĐT khách...">
-                <button class="btn btn-light" type="submit"><i class="bi bi-search"></i> Lọc</button>
-                <a href="{{ route('receptionist.appointments.index') }}" class="btn btn-outline-secondary">Xoá lọc</a>
+                <input type="search" name="q" value="{{ $keyword }}" class="form-control table-search" placeholder="Customer name or phone...">
+                <button class="btn btn-light" type="submit"><i class="bi bi-search"></i> Filter</button>
+                <a href="{{ route('receptionist.appointments.index') }}" class="btn btn-outline-secondary">Clear filter</a>
             </form>
         </div>
 
         @if ($appointments->isEmpty())
             <div class="blank-panel blank-state text-center py-5 text-muted">
-                Không có lịch hẹn nào phù hợp.
+                No matching appointments.
             </div>
         @else
             <div class="table-responsive">
                 <table class="table align-middle">
                     <thead>
                         <tr>
-                            <th>Giờ</th>
-                            <th>Khách hàng</th>
-                            <th>Dịch vụ</th>
-                            <th>Trạng thái</th>
-                            <th class="text-end">Thao tác</th>
+                            <th>Time</th>
+                            <th>Customer</th>
+                            <th>Service</th>
+                            <th>Status</th>
+                            <th class="text-end">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,10 +88,10 @@
                                         </ul>
                                     </div>
 
-                                    <a href="{{ route('receptionist.orders.create', ['appointment_id' => $appointment->AppointmentID]) }}" class="btn btn-sm btn-light" title="Lập hoá đơn">
+                                    <a href="{{ route('receptionist.invoices.create', ['appointment_id' => $appointment->AppointmentID]) }}" class="btn btn-sm btn-light" title="Create invoice">
                                         <i class="bi bi-receipt"></i>
                                     </a>
-                                    <a href="{{ route('receptionist.appointments.edit', $appointment) }}" class="btn btn-sm btn-light" title="Sửa">
+                                    <a href="{{ route('receptionist.appointments.edit', $appointment) }}" class="btn btn-sm btn-light" title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                 </td>

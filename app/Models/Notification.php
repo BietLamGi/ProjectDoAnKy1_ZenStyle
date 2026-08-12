@@ -6,23 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    //
-     protected $table = 'notifications';
+    protected $table = 'Notification';
+
+    protected $primaryKey = 'NotificationID';
+
+    public $timestamps = false;
 
     protected $fillable = [
-        'title',
-        'message',
-        'type',
-        'appointment_id',
-        'is_read',
+        'UserID',
+        'Title',
+        'Message',
+        'Type',
+        'IsRead',
+        'CreatedAt',
     ];
 
     protected $casts = [
-        'is_read' => 'boolean',
+        'IsRead' => 'boolean',
+        'CreatedAt' => 'datetime',
     ];
 
-    public function appointment()
+    public function user()
     {
-        return $this->belongsTo(Appointment::class, 'appointment_id', 'AppointmentID');
+        return $this->belongsTo(User::class, 'UserID', 'UserID');
     }
 }

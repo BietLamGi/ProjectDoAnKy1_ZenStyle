@@ -18,8 +18,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-  protected $table = 'users';
-protected $primaryKey = 'id';
+  protected $table = 'User';
+protected $primaryKey = 'UserID';
 
 public $timestamps = false;
 
@@ -40,17 +40,14 @@ protected $fillable = [
      */
     protected $hidden = [
     'PasswordHash',
+    'remember_token',
 ];
 
 public function getAuthPassword()
 {
     return $this->PasswordHash;
 }
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    
     protected function casts(): array
     {
         return [

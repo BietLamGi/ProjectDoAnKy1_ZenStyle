@@ -71,8 +71,8 @@ class CustomerController extends Controller
                 $query->orderByDesc('AppointmentDate')->orderByDesc('StartTime');
             },
             'appointments.services.service',
-            'orders' => function ($query) {
-                $query->orderByDesc('created_at');
+            'invoices' => function ($query) {
+                $query->orderByDesc('InvoiceID');
             },
         ]);
 
@@ -112,12 +112,30 @@ class CustomerController extends Controller
     /**
      * Xoá khách hàng (chỉ khi không còn dữ liệu liên quan quan trọng).
      */
-    public function destroy(Customer $customer)
+   public function destroy(Customer $customer)
     {
-        $customer->delete();
+        try {
+            \Illuminate\Support\Facades\DB::transaction(function () use ($customer) {
+                $appointmentIds = $customer->appointments()->pluck('AppointmentID');
+
+                \App\Models\AppointmentService::whereIn('AppointmentID', $appointmentIds)->delete();
+
+                \App\Models\Invoice::whereIn('AppointmentID', $appointmentIds)
+                    ->orWhere('CustomerID', $customer->CustomerID)
+                    ->delete();
+
+                $customer->appointments()->delete();
+
+                $customer->delete();
+            });
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()
+                ->route('receptionist.customers.index')
+                ->with('error', 'Không thể xoá khách hàng "' . $customer->FullName . '" vì còn dữ liệu liên quan khác trong hệ thống.');
+        }
 
         return redirect()
             ->route('receptionist.customers.index')
-            ->with('success', 'Đã xoá khách hàng.');
+            ->with('success', 'Đã xoá khách hàng cùng toàn bộ lịch hẹn và hoá đơn liên quan.');
     }
 }

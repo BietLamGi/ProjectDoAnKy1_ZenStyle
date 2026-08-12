@@ -1,6 +1,6 @@
 @extends('layouts.receptionist.app')
 
-@section('title', 'Thông báo')
+@section('title', 'Notifications')
 
 @section('content')
 <div class="container-fluid">
@@ -8,15 +8,18 @@
     <div class="page-heading">
         <div>
             <span class="eyebrow">Reception</span>
-            <h1>Thông báo</h1>
-            <p class="text-muted mb-0">Nhắc việc và cập nhật hệ thống dành cho lễ tân.</p>
+            <h1>Notifications</h1>
+            <p class="text-muted mb-0">Reminders and updates for the receptionist.</p>
         </div>
         <div class="heading-actions">
+            <a href="{{ route('receptionist.notifications.create') }}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Create notification
+            </a>
             <form action="{{ route('receptionist.notifications.read-all') }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <button type="submit" class="btn btn-outline-secondary">
-                    <i class="bi bi-check2-all"></i> Đánh dấu tất cả đã đọc
+                    <i class="bi bi-check2-all"></i> Mark all as read
                 </button>
             </form>
         </div>
@@ -25,7 +28,7 @@
     <div class="panel">
         @if ($notifications->isEmpty())
             <div class="blank-panel blank-state text-center py-5 text-muted">
-                Chưa có thông báo nào.
+                No notifications yet.
             </div>
         @else
             <div class="legend-list">
@@ -33,20 +36,27 @@
                     <div>
                         <span>
                             <strong class="d-block text-body">
-                                {{ $notification->title ?: 'Thông báo' }}
-                                @if (!$notification->is_read)
+                                {{ $notification->Title ?: 'Thông báo' }}
+                                @if (!$notification->IsRead)
                                     <span class="badge text-bg-primary ms-1">Mới</span>
                                 @endif
+                                @if ($notification->Type)
+                                    <span class="badge text-bg-secondary ms-1">{{ $notification->Type }}</span>
+                                @endif
                             </strong>
-                            <span>{{ $notification->message }}</span>
-                            <span class="d-block text-muted small mt-1">{{ $notification->created_at?->format('d/m/Y H:i') }}</span>
+                            <span>{{ $notification->Message }}</span>
+                            <span class="d-block text-muted small mt-1">
+                                {{ $notification->user->Username ?? 'Toàn hệ thống' }}
+                                &middot;
+                                {{ $notification->CreatedAt ? \Illuminate\Support\Carbon::parse($notification->CreatedAt)->format('d/m/Y H:i') : '' }}
+                            </span>
                         </span>
 
-                        @if (!$notification->is_read)
+                        @if (!$notification->IsRead)
                             <form action="{{ route('receptionist.notifications.read', $notification) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-sm btn-light" title="Đánh dấu đã đọc">
+                                <button type="submit" class="btn btn-sm btn-light" title="Mark as read">
                                     <i class="bi bi-check-lg"></i>
                                 </button>
                             </form>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Receptionist;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Notification;
-use App\Models\Order;
+use App\Models\Invoice;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -15,27 +15,26 @@ class DashboardController extends Controller
     {
         $today = Carbon::today()->toDateString();
 
-        $todayAppointments = Appointment::where('appointment_date', $today)->count();
+       $todayAppointments = Appointment::whereDate('AppointmentDate', $today)->count();
 
         $pendingAppointments = Appointment::whereIn('status', ['pending', 'confirmed'])->count();
 
         $checkedInAppointments = Appointment::where('status', 'checked_in')->count();
 
-        $totalCustomers = Appointment::distinct('phone')->count('phone');
+        $totalCustomers = Appointment::distinct('CustomerID')->count('CustomerID');
 
-        $todayRevenue = Order::whereDate('created_at', $today)
-            ->where('payment_status', 'paid')
-            ->sum('total_amount');
+        $todayRevenue = Invoice::whereDate('InvoiceDate', $today)
+    ->sum('FinalAmount');
 
-        $unreadNotifications = Notification::where('is_read', false)->count();
+        $unreadNotifications = Notification::where('IsRead', false)->count();
 
-        $upcomingAppointments = Appointment::where('appointment_date', $today)
+        $upcomingAppointments = Appointment::whereDate('AppointmentDate', $today)
             ->whereIn('status', ['pending', 'confirmed', 'checked_in'])
-            ->orderBy('appointment_time')
+            ->orderBy('StartTime')
             ->limit(8)
             ->get();
 
-        $latestNotifications = Notification::orderByDesc('id')->limit(6)->get();
+        $latestNotifications = Notification::orderByDesc('NotificationID')->limit(6)->get();
 
         return view('receptionist.dashboard', compact(
             'todayAppointments',

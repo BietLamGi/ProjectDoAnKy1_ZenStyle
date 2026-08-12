@@ -1,6 +1,6 @@
 @extends('layouts.receptionist.app')
 
-@section('title', 'Dịch vụ & Sản phẩm')
+@section('title', 'Services & Products')
 
 @section('content')
 <div class="container-fluid">
@@ -8,8 +8,8 @@
     <div class="page-heading">
         <div>
             <span class="eyebrow">Reception</span>
-            <h1>Dịch vụ &amp; Sản phẩm</h1>
-            <p class="text-muted mb-0">Bảng giá tham khảo khi tư vấn và lập hoá đơn cho khách.</p>
+            <h1>Services &amp; Products</h1>
+            <p class="text-muted mb-0">Reference pricing for customer consultation and invoicing.</p>
         </div>
     </div>
 
@@ -17,23 +17,23 @@
         <div class="panel-header">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link {{ $type == '0' ? 'active' : '' }}" href="{{ route('receptionist.services.index', ['type' => 0]) }}">Dịch vụ</a>
+                    <a class="nav-link {{ $type == '0' ? 'active' : '' }}" href="{{ route('receptionist.services.index', ['type' => 0]) }}">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $type == '1' ? 'active' : '' }}" href="{{ route('receptionist.services.index', ['type' => 1]) }}">Sản phẩm</a>
+                    <a class="nav-link {{ $type == '1' ? 'active' : '' }}" href="{{ route('receptionist.services.index', ['type' => 1]) }}">Products</a>
                 </li>
             </ul>
 
             <form class="d-flex" method="GET">
                 <input type="hidden" name="type" value="{{ $type }}">
-                <input type="search" name="q" value="{{ $keyword }}" class="form-control table-search" placeholder="Tìm theo tên...">
+                <input type="search" name="q" value="{{ $keyword }}" class="form-control table-search" placeholder="Search by name...">
                 <button class="btn btn-light ms-2" type="submit"><i class="bi bi-search"></i></button>
             </form>
         </div>
 
         @if ($services->isEmpty())
             <div class="blank-panel blank-state text-center py-5 text-muted">
-                Không tìm thấy dịch vụ / sản phẩm nào.
+                No services or products found.
             </div>
         @else
             @foreach ($services as $category => $items)
@@ -42,12 +42,12 @@
                     <table class="table align-middle">
                         <thead>
                             <tr>
-                                <th>Tên</th>
-                                <th>Mô tả</th>
+                                <th>Name</th>
+                                <th>Description</th>
                                 @if ($type == '0')
-                                    <th>Thời lượng</th>
+                                    <th>Duration</th>
                                 @endif
-                                <th class="text-end">Giá</th>
+                                <th class="text-end">Price</th>
                             </tr>
                         </thead>
                         <tbody>

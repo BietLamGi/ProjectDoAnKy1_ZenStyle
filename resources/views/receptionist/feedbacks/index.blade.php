@@ -1,6 +1,6 @@
 @extends('layouts.receptionist.app')
 
-@section('title', 'Phản hồi khách hàng')
+@section('title', 'Customer feedback')
 
 @section('content')
 <div class="container-fluid">
@@ -8,8 +8,8 @@
     <div class="page-heading">
         <div>
             <span class="eyebrow">Reception</span>
-            <h1>Phản hồi khách hàng</h1>
-            <p class="text-muted mb-0">Theo dõi và xử lý phản hồi, đánh giá từ khách hàng.</p>
+            <h1>Customer feedback</h1>
+            <p class="text-muted mb-0">Track and manage reviews from customers.</p>
         </div>
     </div>
 
@@ -17,29 +17,29 @@
         <div class="panel-header">
             <form class="d-flex gap-2" method="GET">
                 <select name="status" class="form-control" style="max-width: 200px;">
-                    <option value="">Tất cả trạng thái</option>
-                    <option value="new" @selected($status === 'new')>Mới</option>
-                    <option value="reviewed" @selected($status === 'reviewed')>Đã xem</option>
-                    <option value="resolved" @selected($status === 'resolved')>Đã xử lý</option>
+                    <option value="">All statuses</option>
+                    <option value="new" @selected($status === 'new')>New</option>
+                    <option value="reviewed" @selected($status === 'reviewed')>Reviewed</option>
+                    <option value="resolved" @selected($status === 'resolved')>Resolved</option>
                 </select>
-                <button class="btn btn-light" type="submit"><i class="bi bi-filter"></i> Lọc</button>
+                <button class="btn btn-light" type="submit"><i class="bi bi-filter"></i> Filter</button>
             </form>
         </div>
 
         @if ($feedbacks->isEmpty())
             <div class="blank-panel blank-state text-center py-5 text-muted">
-                Chưa có phản hồi nào.
+                No feedback yet.
             </div>
         @else
             <div class="table-responsive">
                 <table class="table align-middle">
                     <thead>
                         <tr>
-                            <th>Khách hàng</th>
-                            <th>Đánh giá</th>
-                            <th>Nội dung</th>
-                            <th>Trạng thái</th>
-                            <th class="text-end">Thao tác</th>
+                            <th>Customer</th>
+                            <th>Rating</th>
+                            <th>Comment</th>
+                            <th>Status</th>
+                            <th class="text-end">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,7 +62,7 @@
                                         <form action="{{ route('receptionist.feedbacks.status', $feedback) }}" method="POST" class="d-inline">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="status" value="reviewed">
-                                            <button type="submit" class="btn btn-sm btn-light" title="Đánh dấu đã xem">
+                                            <button type="submit" class="btn btn-sm btn-light" title="Mark as reviewed">
                                                 <i class="bi bi-eye"></i>
                                             </button>
                                         </form>
@@ -71,7 +71,7 @@
                                         <form action="{{ route('receptionist.feedbacks.status', $feedback) }}" method="POST" class="d-inline">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="status" value="resolved">
-                                            <button type="submit" class="btn btn-sm btn-light text-success" title="Đánh dấu đã xử lý">
+                                            <button type="submit" class="btn btn-sm btn-light text-success" title="Mark as resolved">
                                                 <i class="bi bi-check-circle"></i>
                                             </button>
                                         </form>

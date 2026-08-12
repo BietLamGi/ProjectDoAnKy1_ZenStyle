@@ -1,6 +1,6 @@
 @extends('layouts.receptionist.app')
 
-@section('title', 'Chi tiết lịch hẹn')
+@section('title', 'Appointment details')
 
 @section('content')
 <div class="container-fluid">
@@ -8,11 +8,11 @@
     <div class="page-heading">
         <div>
             <span class="eyebrow">Reception</span>
-            <h1>Lịch hẹn #{{ $appointment->AppointmentID }}</h1>
+            <h1>Appointment #{{ $appointment->AppointmentID }}</h1>
         </div>
         <div class="heading-actions">
             <a href="{{ route('receptionist.appointments.edit', $appointment) }}" class="btn btn-primary">
-                <i class="bi bi-pencil"></i> Sửa
+                <i class="bi bi-pencil"></i> Edit
             </a>
             <a href="{{ route('receptionist.appointments.index') }}" class="btn btn-light">
                 <i class="bi bi-arrow-left"></i>

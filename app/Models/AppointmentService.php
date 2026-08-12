@@ -20,14 +20,14 @@ protected $fillable = [
     'UnitPrice',
 ];
 // reception
-public function appointment()
-    {
-        return $this->belongsTo(Appointment::class, 'AppointmentID', 'AppointmentID');
-    }
+// public function appointment()
+//     {
+//         return $this->belongsTo(Appointment::class, 'AppointmentID', 'AppointmentID');
+//     }
 
-    public function service()
-    {
-        return $this->belongsTo(Service::class, 'ServiceID', 'ServiceID');
-    }
+//     public function service()
+//     {
+//         return $this->belongsTo(Service::class, 'ServiceID', 'ServiceID');
+//     }
 }
 

@@ -60,13 +60,19 @@ class AppointmentController extends Controller
     {
         $request->validate([
             'customer_id' => 'nullable|exists:Customer,CustomerID',
-            'fullname' => 'required_without:customer_id|max:100',
-            'phone' => 'required_without:customer_id|max:20',
+            'fullname' => 'nullable|required_without:customer_id|max:100',
+            'phone' => 'nullable|required_without:customer_id|max:20',
             'service_id' => 'required|exists:Service,ServiceID',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required',
             'note' => 'nullable|max:500',
         ]);
+
+        if (empty($request->customer_id) && empty($request->fullname) && empty($request->phone)) {
+            return back()->withErrors([
+                'customer_id' => 'Please select an existing customer or create a new one by filling in the customer name and phone number.',
+            ])->withInput();
+        }
 
         if ($request->filled('customer_id')) {
             $customer = Customer::findOrFail($request->customer_id);
@@ -124,9 +130,14 @@ class AppointmentController extends Controller
     {
         $appointment->load(['customer', 'services.service']);
 
+        $services = \App\Models\Service::where('IsActive', 1)
+            ->orderBy('ServiceName')
+            ->get();
+
         return view('receptionist.appointments.edit', [
             'appointment' => $appointment,
             'statuses' => self::STATUSES,
+            'services' => $services,
         ]);
     }
 

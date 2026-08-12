@@ -9,14 +9,14 @@
         <div>
             <span class="eyebrow">Reception Desk</span>
             <h1>Dashboard</h1>
-            <p class="text-muted mb-0">Chào mừng trở lại! Đây là tổng quan hoạt động hôm nay.</p>
+            <p class="text-muted mb-0">Welcome back! Here is today's activity overview.</p>
         </div>
         <div class="heading-actions">
             <a href="{{ route('receptionist.appointments.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i> Đặt lịch mới
+                <i class="bi bi-plus-lg"></i> New appointment
             </a>
-            <a href="{{ route('receptionist.orders.create') }}" class="btn btn-outline-secondary">
-                <i class="bi bi-receipt"></i> Lập hoá đơn
+            <a href="{{ route('receptionist.invoices.create') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-receipt"></i> Create invoice
             </a>
         </div>
     </div>
@@ -25,20 +25,20 @@
         <div class="col-sm-6 col-xl-3">
             <div class="metric-card metric-primary">
                 <div class="metric-top">
-                    <span class="metric-label">Lịch hẹn hôm nay</span>
+                    <span class="metric-label">Today's appointments</span>
                     <span class="metric-icon d-inline-flex align-items-center justify-content-center">
                         <i class="bi bi-calendar-check"></i>
                     </span>
                 </div>
                 <div class="metric-value">{{ $todayAppointments }}</div>
-                <div class="metric-meta">Tổng số lịch trong ngày</div>
+                <div class="metric-meta">Total appointments today</div>
             </div>
         </div>
 
         <div class="col-sm-6 col-xl-3">
             <div class="metric-card metric-warning">
                 <div class="metric-top">
-                    <span class="metric-label">Chờ xử lý</span>
+                    <span class="metric-label">Pending</span>
                     <span class="metric-icon d-inline-flex align-items-center justify-content-center">
                         <i class="bi bi-hourglass-split"></i>
                     </span>
@@ -51,13 +51,13 @@
         <div class="col-sm-6 col-xl-3">
             <div class="metric-card metric-success">
                 <div class="metric-top">
-                    <span class="metric-label">Khách hàng</span>
+                    <span class="metric-label">Customers</span>
                     <span class="metric-icon d-inline-flex align-items-center justify-content-center">
                         <i class="bi bi-people"></i>
                     </span>
                 </div>
                 <div class="metric-value">{{ $totalCustomers }}</div>
-                <div class="metric-meta">Tổng số khách trong hệ thống</div>
+                <div class="metric-meta">Total customers in system</div>
             </div>
         </div>
 
@@ -70,7 +70,7 @@
                     </span>
                 </div>
                 <div class="metric-value">{{ number_format($todayRevenue, 0, ',', '.') }}đ</div>
-                <div class="metric-meta">Hoá đơn đã thanh toán</div>
+                <div class="metric-meta">Paid invoices</div>
             </div>
         </div>
     </div>
@@ -80,15 +80,15 @@
             <div class="panel h-100">
                 <div class="panel-header">
                     <div>
-                        <h5 class="mb-0">Lịch hẹn sắp tới hôm nay</h5>
-                        <p class="text-muted mb-0">Xác nhận, check-in hoặc hoàn tất trực tiếp từ danh sách.</p>
+                        <h5 class="mb-0">Upcoming appointments today</h5>
+                        <p class="text-muted mb-0">Confirm, check in, or complete directly from the list.</p>
                     </div>
-                    <a href="{{ route('receptionist.appointments.index') }}" class="btn btn-sm btn-light">Xem tất cả</a>
+                    <a href="{{ route('receptionist.appointments.index') }}" class="btn btn-sm btn-light">View all</a>
                 </div>
 
                 @if ($upcomingAppointments->isEmpty())
                     <div class="blank-panel blank-state text-center py-4 text-muted">
-                        Không có lịch hẹn nào sắp tới trong hôm nay.
+                        No upcoming appointments for today.
                     </div>
                 @else
                     <div class="table-responsive">
@@ -110,7 +110,7 @@
                                             <div class="text-muted small">{{ $appointment->customer->Phone ?? '' }}</div>
                                         </td>
                                         <td>
-                                            {{ $appointment->services->pluck('service.ServiceName')->filter()->join(', ') ?: '—' }}
+                                            <!-- {{ $appointment->services->pluck('service.ServiceName')->filter()->join(', ') ?: '—' }} -->
                                         </td>
                                         <td>
                                             <span class="badge text-bg-{{ $appointment->Status === 'Completed' ? 'success' : ($appointment->Status === 'Cancelled' ? 'danger' : ($appointment->Status === 'CheckedIn' ? 'info' : 'warning')) }}">
@@ -130,25 +130,25 @@
             <div class="panel h-100">
                 <div class="panel-header">
                     <div>
-                        <h5 class="mb-0">Thông báo</h5>
-                        <p class="text-muted mb-0">{{ $unreadNotifications }} thông báo chưa đọc</p>
+                        <h5 class="mb-0">Notifications</h5>
+                        <p class="text-muted mb-0">{{ $unreadNotifications }} unread notifications</p>
                     </div>
-                    <a href="{{ route('receptionist.notifications.index') }}" class="btn btn-sm btn-light">Xem tất cả</a>
+                    <a href="{{ route('receptionist.notifications.index') }}" class="btn btn-sm btn-light">View all</a>
                 </div>
 
                 @if ($latestNotifications->isEmpty())
                     <div class="blank-panel blank-state text-center py-4 text-muted">
-                        Chưa có thông báo nào.
+                        No notifications yet.
                     </div>
                 @else
                     <div class="info-list">
                         @foreach ($latestNotifications as $notification)
                             <div>
                                 <span>
-                                    <strong class="d-block text-body">{{ $notification->title ?? 'Thông báo' }}</strong>
-                                    {{ \Illuminate\Support\Str::limit($notification->message, 60) }}
+                                    <strong class="d-block text-body">{{ $notification->Title ?? 'Notification' }}</strong>
+                                    {{ \Illuminate\Support\Str::limit($notification->Message, 60) }}
                                 </span>
-                                @if (!$notification->is_read)
+                                @if (!$notification->IsRead)
                                     <span class="status-dot"></span>
                                 @endif
                             </div>

@@ -23,4 +23,14 @@ class Customer extends Model
         'LoyaltyPoints',
         'MembershipTier',
     ];
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class, 'CustomerID', 'CustomerID');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'CustomerID', 'CustomerID');
+    }
+
 }
