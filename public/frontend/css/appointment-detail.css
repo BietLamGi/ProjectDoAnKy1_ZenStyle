@@ -1,0 +1,452 @@
+/* =========================================
+   APPOINTMENT DETAILS
+========================================= */
+
+.appointment-detail-page {
+    min-height: 100vh;
+    padding: 55px 20px 70px;
+    background: #f8f5ee;
+    color: #332f29;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.appointment-detail-heading {
+    max-width: 850px;
+    margin: 0 auto 35px;
+}
+
+.detail-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #a18756;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.appointment-detail-heading h2 {
+    margin: 0;
+
+    color: #29251f;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.appointment-detail-heading p {
+    margin: 8px 0 0;
+
+    color: #6f685d;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.booking-detail-card {
+    max-width: 850px;
+    margin: auto;
+    padding: 30px;
+
+    background: #fffdf9;
+    border: 1px solid #e5ddcf;
+    border-radius: 16px;
+
+    box-shadow: 0 7px 25px rgba(80, 65, 45, 0.08);
+}
+
+
+/* =========================================
+   CARD TOP
+========================================= */
+
+.booking-detail-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 24px;
+    border-bottom: 1px solid #eee7dc;
+}
+
+.booking-small-title {
+    color: #8a8175;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.booking-detail-top h3 {
+    margin: 5px 0 0;
+
+    color: #302b25;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.booking-status {
+    position: relative;
+
+    padding: 8px 14px 8px 25px;
+
+    background: #f4ead5;
+    border-radius: 20px;
+
+    color: #806534;
+
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.booking-status i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+
+    font-size: 7px;
+
+    transform: translateY(-50%);
+}
+
+
+/* =========================================
+   DATE / TIME
+========================================= */
+
+.booking-date-time {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+
+    padding: 25px 0;
+}
+
+.booking-info-box {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 17px;
+
+    background: #f8f3e9;
+    border-radius: 11px;
+}
+
+.booking-info-icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #eee3cf;
+    border-radius: 10px;
+
+    color: #967744;
+    font-size: 16px;
+}
+
+.booking-info-box div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.booking-info-box span {
+    color: #82796d;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.booking-info-box strong {
+    color: #39332c;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
+.booking-section-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 17px;
+}
+
+.booking-section-title i {
+    color: #9a7b47;
+    font-size: 15px;
+}
+
+.booking-section-title h4 {
+    margin: 0;
+
+    color: #342e27;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   SERVICE
+========================================= */
+
+.booking-service-section {
+    padding: 24px 0;
+
+    border-top: 1px solid #eee7dc;
+}
+
+.booking-service-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 17px;
+
+    background: #faf6ee;
+    border: 1px solid #eee6d9;
+    border-radius: 11px;
+}
+
+.booking-service-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.booking-service-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eee3cf;
+    border-radius: 10px;
+
+    color: #967744;
+}
+
+.booking-service-left h3 {
+    margin: 0 0 4px;
+
+    color: #302b25;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.booking-service-left p {
+    margin: 0 0 3px;
+
+    color: #71695f;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.booking-service-left small {
+    color: #91877a;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.booking-service-price {
+    text-align: right;
+}
+
+.booking-service-price span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #8a8175;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.booking-service-price strong {
+    color: #806536;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.booking-service-price small {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   NOTES
+========================================= */
+
+.booking-notes {
+    padding: 22px 0;
+
+    border-top: 1px solid #eee7dc;
+}
+
+.booking-notes p {
+    margin: 0;
+    padding: 15px 17px;
+
+    background: #faf6ee;
+    border-radius: 9px;
+
+    color: #5f584f;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   TOTAL
+========================================= */
+
+.booking-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 0;
+
+    border-top: 1px solid #eee7dc;
+}
+
+.booking-total span {
+    color: #413b33;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.booking-total strong {
+    color: #806536;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.booking-total small {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.booking-detail-footer {
+    padding-top: 20px;
+
+    border-top: 1px solid #eee7dc;
+}
+
+.back-appointments-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #806536;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.back-appointments-btn:hover {
+    color: #5f4a27;
+    text-decoration: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .appointment-detail-page {
+        padding: 40px 15px 55px;
+    }
+
+    .appointment-detail-heading h2 {
+        font-size: 27px;
+    }
+
+    .booking-detail-card {
+        padding: 22px 20px;
+    }
+
+    .booking-date-time {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-service-item {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .booking-service-price {
+        flex-shrink: 0;
+    }
+
+    .booking-detail-top h3 {
+        font-size: 21px;
+    }
+}
+
+.booking-detail-footer {
+    text-align: center;
+    padding: 25px 30px 30px;
+}
+
+.back-appointments-btn {
+    display: inline-block;
+}
+
+.cancel-form {
+    margin-top: 14px;
+}
+
+.cancel-appointment-btn {
+    border: none;
+    background: none;
+
+    padding: 0;
+
+    color: #b77a7a;
+    font-size: 12px;
+    font-weight: 400;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.cancel-appointment-btn:hover {
+    color: #9d4f4f;
+    text-decoration: underline;
+}
