@@ -22,8 +22,9 @@ class User extends Authenticatable
 protected $primaryKey = 'UserID';
 
 public $timestamps = false;
-
+// Chỗ thêm staff
 protected $fillable = [
+    'FullName',
     'Username',
     'PasswordHash',
     'Email',
@@ -31,6 +32,8 @@ protected $fillable = [
     'RoleID',
     'IsActive',
     'DateBirth',
+    'Position',
+    'StaffType',
 ];
 
     /**

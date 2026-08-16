@@ -27,6 +27,7 @@ use App\Http\Controllers\Receptionist\DashboardController as ReceptionistDashboa
 //admin 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -44,6 +45,12 @@ Route::prefix('admin')->group(function () {
         ->name('admin.dashboard');
 
     Route::resource('users', UserController::class);
+    // Chỗ thêm staff
+    Route::get('staff', [StaffController::class, 'index'])
+        ->name('staff.index');
+    Route::get('staff/{id}', [StaffController::class, 'show'])
+        ->name('staff.show');
+
     Route::resource('services', ServiceController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('invoices', InvoiceController::class);

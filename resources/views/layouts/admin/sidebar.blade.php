@@ -19,6 +19,14 @@
     <span class="nav-text">Users</span>
 </a>
 
+{{-- Staff --}}
+<a class="nav-link {{ request()->routeIs('staff.*') ? 'active' : '' }}"
+   href="{{ route('staff.index') }}">
+    <span class="nav-icon">
+        <i class="bi bi-person-badge"></i>
+    </span>
+    <span class="nav-text">Staff</span>
+</a>
 
 {{-- Customers --}}
 <a class="nav-link {{ request()->routeIs('customers.*') ? 'active' : '' }}"
