@@ -345,7 +345,85 @@
 
                 </a>
 
+{{-- ============================================= --}}
+{{-- CHANGE PASSWORD --}}
+{{-- ============================================= --}}
 
+<div class="profile-section">
+
+    <div class="section-title">
+        <h4>Change Password</h4>
+
+        <span>
+            Update your account password
+        </span>
+    </div>
+
+    @if(session('password_success'))
+        <div class="alert alert-success">
+            {{ session('password_success') }}
+        </div>
+    @endif
+
+    @if(session('password_error'))
+        <div class="alert alert-danger">
+            {{ session('password_error') }}
+        </div>
+    @endif
+
+    @if($errors->has('current_password') || $errors->has('new_password'))
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form method="POST"
+          action="{{ route('profile.password.update') }}">
+
+        @csrf
+        @method('PUT')
+
+        <div class="form-group">
+            <input
+                type="password"
+                name="current_password"
+                class="form-control"
+                placeholder="Current Password"
+            >
+        </div>
+
+        <div class="form-group">
+            <input
+                type="password"
+                name="new_password"
+                class="form-control"
+                placeholder="New Password"
+            >
+        </div>
+
+        <div class="form-group">
+            <input
+                type="password"
+                name="new_password_confirmation"
+                class="form-control"
+                placeholder="Confirm New Password"
+            >
+        </div>
+
+        <button
+            type="submit"
+            class="edit-profile-btn"
+        >
+            Change Password
+        </button>
+
+    </form>
+
+</div>
 
                 {{-- ============================================= --}}
                 {{-- LOGOUT --}}

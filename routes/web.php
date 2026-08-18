@@ -148,6 +148,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/my-appointments/{appointment}/cancel',
     [CustomerAppointmentController::class, 'cancel'])
     ->name('customer.appointments.cancel');
+
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])
+    ->name('profile.password.update');
+    
 });
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

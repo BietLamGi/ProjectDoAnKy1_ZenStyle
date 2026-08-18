@@ -38,6 +38,30 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+
+        // ROLE 1 = ADMIN
+        if ((int) $user->RoleID === 1) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('success', 'Welcome Admin!');
+        }
+
+        // ROLE 2 = RECEPTIONIST
+        if ((int) $user->RoleID === 2) {
+            return redirect()
+                ->route('receptionist.dashboard')
+                ->with('success', 'Login successful.');
+        }
+
+        // ROLE 3 = STAFF
+        if ((int) $user->RoleID === 3) {
+            return redirect()
+                ->route('staff.dashboard')
+                ->with('success', 'Login successful.');
+        }
+
+        // ROLE 4 = CUSTOMER
         return redirect()
             ->route('home')
             ->with('success', 'Login successful.');
