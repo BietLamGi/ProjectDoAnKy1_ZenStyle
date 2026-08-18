@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class ProfileController extends Controller
@@ -105,4 +106,34 @@ if ($customer) {
 }
 
     
+
+public function updatePassword(Request $request)
+{
+    $validated = $request->validate([
+        'current_password' => ['required'],
+        'new_password' => ['required', 'string', 'min:6', 'confirmed'],
+    ], [
+        'current_password.required' => 'Please enter your current password.',
+        'new_password.required' => 'Please enter a new password.',
+        'new_password.min' => 'Password must be at least 6 characters.',
+        'new_password.confirmed' => 'Password confirmation does not match.',
+    ]);
+
+    $user = Auth::user();
+
+    if (!Hash::check($validated['current_password'], $user->PasswordHash)) {
+    return back()->with(
+        'password_error',
+        'Current password is incorrect.'
+    );
+}
+
+$user->PasswordHash = Hash::make($validated['new_password']);
+$user->save();
+
+return back()->with(
+    'password_success',
+    'Password changed successfully.'
+);
+}
 }
