@@ -3,35 +3,34 @@
 namespace App\Http\Controllers\Receptionist;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
+    /**
+     * Customer feedback list - filter by rating and search by customer,
+     * so the receptionist can spot low ratings and follow up on complaints.
+     */
     public function index(Request $request)
     {
-        $status = $request->query('status');
+        $rating = $request->query('rating');
+        $keyword = $request->query('q');
 
-        $feedbacks = Feedback::with(['customer', 'appointment'])
-            ->when($status, fn ($query) => $query->where('status', $status))
-            ->orderByDesc('id')
+        $feedbacks = Feedback::with(['appointment.customer'])
+            ->when($rating, fn ($query) => $query->where('Rating', $rating))
+            ->when($keyword, function ($query) use ($keyword) {
+                $query->whereHas('appointment.customer', function ($q) use ($keyword) {
+                    $q->where('FullName', 'like', "%{$keyword}%")
+                        ->orWhere('Phone', 'like', "%{$keyword}%");
+                });
+            })
+            ->orderByDesc('FeedbackDate')
+            ->orderByDesc('FeedbackID')
             ->paginate(10)
             ->withQueryString();
 
-        return view('receptionist.feedbacks.index', compact('feedbacks', 'status'));
-    }
-
-    /**
-     * Đánh dấu phản hồi đã xử lý.
-     */
-    public function updateStatus(Request $request, Feedback $feedback)
-    {
-        $request->validate([
-            'status' => 'required|in:new,reviewed,resolved',
-        ]);
-
-        $feedback->update(['status' => $request->status]);
-
-        return back()->with('success', 'Đã cập nhật trạng thái phản hồi.');
+        return view('receptionist.feedbacks.index', compact('feedbacks', 'rating', 'keyword'));
     }
 }

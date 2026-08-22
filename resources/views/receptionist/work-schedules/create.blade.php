@@ -36,14 +36,22 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label">Work date <span class="text-danger">*</span></label>
-                    <input type="date" name="WorkDate" class="form-control" value="{{ old('WorkDate') }}" required>
-                </div>
+    <label class="form-label">Shift start time <span class="text-danger">*</span></label>
+    <input type="time"
+           name="ShiftStart"
+           class="form-control"
+           value="{{ old('ShiftStart') }}"
+           required>
+</div>
 
-                <div class="col-md-6">
-                    <label class="form-label">Shift start time <span class="text-danger">*</span></label>
-                    <input type="time" name="ShiftStart" class="form-control" value="{{ old('ShiftStart') }}" required>
-                </div>
+<div class="col-md-6">
+    <label class="form-label">Shift end time <span class="text-danger">*</span></label>
+    <input type="time"
+           name="ShiftEnd"
+           class="form-control"
+           value="{{ old('ShiftEnd') }}"
+           required>
+</div>
 
                 <div class="col-md-6">
                     <label class="form-label">Shift end time <span class="text-danger">*</span></label>

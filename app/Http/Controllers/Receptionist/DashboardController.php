@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Receptionist;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Appointment;
+use App\Models\Customer;
 use App\Models\Notification;
 use App\Models\Invoice;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -15,26 +16,57 @@ class DashboardController extends Controller
     {
         $today = Carbon::today()->toDateString();
 
-       $todayAppointments = Appointment::whereDate('AppointmentDate', $today)->count();
+        $todayAppointments = Appointment::whereDate(
+            'AppointmentDate',
+            $today
+        )->count();
 
-        $pendingAppointments = Appointment::whereIn('status', ['pending', 'confirmed'])->count();
+        $pendingAppointments = Appointment::whereIn(
+            'Status',
+            ['Pending', 'Confirmed']
+        )->count();
 
-        $checkedInAppointments = Appointment::where('status', 'checked_in')->count();
+        $checkedInAppointments = Appointment::where(
+            'Status',
+            'CheckedIn'
+        )->count();
 
-        $totalCustomers = Appointment::distinct('CustomerID')->count('CustomerID');
+        $totalCustomers = Customer::count();
 
-        $todayRevenue = Invoice::whereDate('InvoiceDate', $today)
-    ->sum('FinalAmount');
+        $todayRevenue = Invoice::whereDate(
+            'InvoiceDate',
+            $today
+        )->sum('FinalAmount');
 
-        $unreadNotifications = Notification::where('IsRead', false)->count();
+        $unreadNotifications = Notification::where(
+            'IsRead',
+            false
+        )->count();
 
-        $upcomingAppointments = Appointment::whereDate('AppointmentDate', $today)
-            ->whereIn('status', ['pending', 'confirmed', 'checked_in'])
-            ->orderBy('StartTime')
-            ->limit(8)
-            ->get();
+        $unconfirmedInvoices = Invoice::where(function ($q) {
+            $q->whereNull('PaymentMethod')
+              ->orWhere('PaymentMethod', '');
+        })->count();
 
-        $latestNotifications = Notification::orderByDesc('NotificationID')->limit(6)->get();
+        $upcomingAppointments = Appointment::with([
+            'customer',
+            'services.service'
+        ])
+        ->whereDate('AppointmentDate', $today)
+        ->whereIn('Status', [
+            'Pending',
+            'Confirmed',
+            'CheckedIn'
+        ])
+        ->orderBy('StartTime')
+        ->limit(8)
+        ->get();
+
+        $latestNotifications = Notification::orderByDesc(
+            'NotificationID'
+        )
+        ->limit(6)
+        ->get();
 
         return view('receptionist.dashboard', compact(
             'todayAppointments',
@@ -43,6 +75,7 @@ class DashboardController extends Controller
             'totalCustomers',
             'todayRevenue',
             'unreadNotifications',
+            'unconfirmedInvoices',
             'upcomingAppointments',
             'latestNotifications'
         ));

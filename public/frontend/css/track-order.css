@@ -1,0 +1,674 @@
+/* =========================================================
+   TRACK ORDER
+   ========================================================= */
+
+.track-page {
+    padding: 100px 0 90px;
+    background: #faf9f6;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.track-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 35px;
+}
+
+.track-subtitle {
+    display: block;
+    margin-bottom: 10px;
+
+    color: #a28e56;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.track-header h2 {
+    margin-bottom: 12px;
+
+    color: #222;
+
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.track-header p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.track-search-card {
+    width: 100%;
+    max-width: 500px;
+
+    margin: 0 auto 35px;
+    padding: 25px 30px;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 6px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.track-form-group {
+    margin-bottom: 18px;
+}
+
+.track-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #333;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.track-form-group input {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 14px;
+
+    border: 1px solid #ddd;
+    border-radius: 3px;
+
+    outline: none;
+
+    color: #333;
+    background: #fff;
+
+    font-size: 14px;
+
+    transition: all 0.2s ease;
+}
+
+.track-form-group input:focus {
+    border-color: #a28e56;
+    box-shadow: 0 0 0 2px rgba(162, 142, 86, 0.08);
+}
+
+.track-form-group input::placeholder {
+    color: #aaa;
+}
+
+/* SEARCH BUTTON */
+
+.track-submit {
+    width: 100%;
+    height: 44px;
+
+    border: 1px solid #a28e56;
+    border-radius: 3px;
+
+    background: #a28e56;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.track-submit i {
+    margin-left: 7px;
+}
+
+.track-submit:hover {
+    background: #8f7c49;
+    border-color: #8f7c49;
+}
+
+/* ERROR */
+
+.track-error {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #c0392b;
+    font-size: 12px;
+}
+
+/* =========================================================
+   ALERT
+   ========================================================= */
+
+.track-alert {
+    display: flex;
+    align-items: center;
+
+    max-width: 700px;
+
+    margin: 0 auto 30px;
+    padding: 14px 18px;
+
+    border: 1px solid #eadfc4;
+    border-radius: 4px;
+
+    background: #fffaf0;
+
+    color: #6f603c;
+
+    font-size: 14px;
+}
+
+.track-alert i {
+    margin-right: 10px;
+}
+
+/* =========================================================
+   RESULT HEADER
+   ========================================================= */
+
+.track-result-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin: 50px 0 25px;
+}
+
+.track-result-header span {
+    color: #a28e56;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+.track-result-header h3 {
+    margin: 5px 0 0;
+
+    color: #222;
+
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.track-result-header a {
+    color: #a28e56;
+
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.track-result-header a:hover {
+    color: #806d3d;
+}
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.track-section {
+    margin-bottom: 50px;
+}
+
+.track-section-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.track-section-title > div {
+    display: flex;
+    align-items: center;
+}
+
+.track-section-title > div > span {
+    margin-right: 12px;
+
+    color: #a28e56;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.track-section-title h3 {
+    margin: 0;
+
+    color: #333;
+
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.track-section-title small {
+    color: #999;
+    font-size: 12px;
+}
+
+/* =========================================================
+   ORDER CARD
+   ========================================================= */
+
+.track-order-card {
+    margin-bottom: 18px;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.035);
+}
+
+.track-order-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 22px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.track-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #a28e56;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.track-order-top h4 {
+    margin: 0;
+
+    color: #333;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.track-payment {
+    padding: 5px 10px;
+
+    border-radius: 3px;
+
+    background: #f5f2ea;
+
+    color: #7e6e45;
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+
+.track-products {
+    padding: 5px 22px;
+}
+
+.track-product {
+    display: flex;
+    align-items: center;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.track-product:last-child {
+    border-bottom: none;
+}
+
+.track-product-image {
+    width: 65px;
+    height: 65px;
+
+    flex-shrink: 0;
+
+    margin-right: 15px;
+
+    overflow: hidden;
+
+    border-radius: 4px;
+
+    background: #f5f5f5;
+}
+
+.track-product-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.track-no-image {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #aaa;
+}
+
+.track-product-info {
+    flex: 1;
+}
+
+.track-product-info h5 {
+    margin: 0 0 5px;
+
+    color: #333;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.track-product-info span {
+    color: #999;
+
+    font-size: 12px;
+}
+
+.track-product-price {
+    margin-left: 20px;
+
+    color: #555;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* =========================================================
+   ORDER BOTTOM
+   ========================================================= */
+
+.track-order-bottom {
+    display: flex;
+    align-items: center;
+
+    padding: 17px 22px;
+
+    border-top: 1px solid #eee;
+
+    background: #fcfcfb;
+}
+
+.track-order-date,
+.track-order-total {
+    margin-right: 40px;
+}
+
+.track-order-date span,
+.track-order-total span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #999;
+
+    font-size: 11px;
+}
+
+.track-order-date strong,
+.track-order-total strong {
+    color: #444;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.track-detail-btn {
+    margin-left: auto;
+
+    padding: 8px 14px;
+
+    border: 1px solid #a28e56;
+    border-radius: 3px;
+
+    color: #a28e56;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.track-detail-btn i {
+    margin-left: 5px;
+}
+
+.track-detail-btn:hover {
+    background: #a28e56;
+    color: #fff;
+
+    text-decoration: none;
+}
+
+/* =========================================================
+   APPOINTMENT
+   ========================================================= */
+
+.track-appointment-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+    padding: 20px 22px;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 5px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.035);
+}
+
+.track-appointment-main {
+    display: flex;
+    align-items: center;
+
+    min-width: 0;
+}
+
+.track-appointment-image {
+    width: 75px;
+    height: 75px;
+
+    flex-shrink: 0;
+
+    margin-right: 17px;
+
+    overflow: hidden;
+
+    border-radius: 4px;
+
+    background: #f5f5f5;
+}
+
+.track-appointment-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.track-appointment-info h4 {
+    margin: 0 0 5px;
+
+    color: #333;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.track-appointment-info p {
+    margin: 0;
+
+    color: #999;
+
+    font-size: 12px;
+}
+
+.track-appointment-details {
+    display: flex;
+    align-items: center;
+
+    margin-left: 30px;
+}
+
+.track-appointment-details > div {
+    min-width: 100px;
+
+    margin-left: 25px;
+}
+
+.track-appointment-details span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #999;
+
+    font-size: 10px;
+}
+
+.track-appointment-details strong {
+    color: #444;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.track-appointment-details .track-status {
+    color: #a28e56;
+}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.track-empty {
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.track-empty h4 {
+    margin-bottom: 7px;
+
+    color: #444;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.track-empty p {
+    margin: 0;
+
+    color: #999;
+
+    font-size: 13px;
+}
+
+.track-empty-text {
+    margin: 15px 0;
+
+    color: #999;
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 767px) {
+    .track-page {
+        padding: 70px 0 60px;
+    }
+
+    .track-header h2 {
+        font-size: 26px;
+    }
+
+    .track-search-card {
+        padding: 20px;
+    }
+
+    .track-result-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .track-order-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .track-product-price {
+        font-size: 11px;
+    }
+
+    .track-order-bottom {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .track-order-date,
+    .track-order-total {
+        margin-right: 15px;
+    }
+
+    .track-detail-btn {
+        margin-left: 0;
+    }
+
+    .track-appointment-card {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .track-appointment-details {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .track-appointment-details > div {
+        margin-left: 0;
+        margin-right: 20px;
+        min-width: auto;
+    }
+}

@@ -22,8 +22,41 @@ class Service extends Model
         'Image',
     ];
 
-    public function appointmentServices()
-    {
-        return $this->hasMany(AppointmentService::class, 'ServiceID', 'ServiceID');
+    public function activePromotion()
+{
+    return $this->hasOne(
+        Promotion::class,
+        'ServiceID',
+        'ServiceID'
+    )
+    ->where('IsActive', 1)
+    ->whereDate('StartDate', '<=', today())
+    ->whereDate('EndDate', '>=', today())
+    ->orderByDesc('PromotionID');
+}
+
+public function getDiscountedPriceAttribute()
+{
+    $promotion = $this->activePromotion;
+
+    if (!$promotion) {
+        return $this->Price;
     }
+
+    if ($promotion->DiscountType === 'Percent') {
+        return max(
+            0,
+            $this->Price - ($this->Price * $promotion->DiscountValue / 100)
+        );
+    }
+
+    if ($promotion->DiscountType === 'Fixed') {
+        return max(
+            0,
+            $this->Price - $promotion->DiscountValue
+        );
+    }
+
+    return $this->Price;
+}
 }

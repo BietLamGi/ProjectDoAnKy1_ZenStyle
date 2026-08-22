@@ -3,23 +3,39 @@
 namespace App\Http\Controllers\Receptionist;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
     /**
-     * Danh sách khách hàng - hỗ trợ tìm theo tên/số điện thoại.
+     * Customer list - supports search by name/phone number.
      */
     public function index(Request $request)
     {
         $keyword = $request->query('q');
 
+        // AppointmentID is an int column on SQL Server: comparing it to a
+        // non-numeric string throws a conversion error rather than just
+        // finding no rows, so only add that branch when the keyword (minus
+        // an optional leading '#') is actually numeric.
+        $appointmentCode = ltrim((string) $keyword, '#');
+        $isAppointmentCode = $appointmentCode !== '' && ctype_digit($appointmentCode);
+
         $customers = Customer::query()
-            ->when($keyword, function ($query) use ($keyword) {
+    ->withCount('appointments')
+    ->when($keyword, function ($query) use ($keyword, $appointmentCode, $isAppointmentCode) {
                 $query->where('FullName', 'like', "%{$keyword}%")
                     ->orWhere('Phone', 'like', "%{$keyword}%")
-                    ->orWhere('Email', 'like', "%{$keyword}%");
+                    ->orWhere('Email', 'like', "%{$keyword}%")
+                    // Search by appointment code too, e.g. typing "12" or "#12"
+                    // matches the customer who owns AppointmentID 12.
+                    ->when($isAppointmentCode, function ($query) use ($appointmentCode) {
+                        $query->orWhereHas('appointments', function ($q) use ($appointmentCode) {
+                            $q->where('AppointmentID', $appointmentCode);
+                        });
+                    });
             })
             ->orderByDesc('CustomerID')
             ->paginate(10)
@@ -29,7 +45,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Form tạo khách hàng mới (đón khách walk-in).
+     * Form to add a new customer (walk-in reception).
      */
     public function create()
     {
@@ -37,7 +53,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Lưu khách hàng mới.
+     * Save a new customer.
      */
     public function store(Request $request)
     {
@@ -58,11 +74,11 @@ class CustomerController extends Controller
 
         return redirect()
             ->route('receptionist.customers.index')
-            ->with('success', 'Đã thêm khách hàng "' . $customer->FullName . '".');
+            ->with('success', 'Customer "' . $customer->FullName . '" added.');
     }
 
     /**
-     * Xem chi tiết khách hàng: lịch sử lịch hẹn & hóa đơn.
+     * View customer profile: appointment history & invoices.
      */
     public function show(Customer $customer)
     {
@@ -80,7 +96,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Form chỉnh sửa khách hàng.
+     * Form to edit a customer.
      */
     public function edit(Customer $customer)
     {
@@ -88,7 +104,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Cập nhật thông tin khách hàng.
+     * Update customer information.
      */
     public function update(Request $request, Customer $customer)
     {
@@ -106,11 +122,11 @@ class CustomerController extends Controller
 
         return redirect()
             ->route('receptionist.customers.index')
-            ->with('success', 'Đã cập nhật thông tin khách hàng.');
+            ->with('success', 'Customer information updated.');
     }
 
     /**
-     * Xoá khách hàng (chỉ khi không còn dữ liệu liên quan quan trọng).
+     * Delete a customer (only when there is no important related data left).
      */
    public function destroy(Customer $customer)
     {
@@ -131,11 +147,11 @@ class CustomerController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()
                 ->route('receptionist.customers.index')
-                ->with('error', 'Không thể xoá khách hàng "' . $customer->FullName . '" vì còn dữ liệu liên quan khác trong hệ thống.');
+                ->with('error', 'Cannot delete customer "' . $customer->FullName . '" because related data still exists in the system.');
         }
 
         return redirect()
             ->route('receptionist.customers.index')
-            ->with('success', 'Đã xoá khách hàng cùng toàn bộ lịch hẹn và hoá đơn liên quan.');
+            ->with('success', 'Customer deleted along with all related appointments and invoices.');
     }
 }

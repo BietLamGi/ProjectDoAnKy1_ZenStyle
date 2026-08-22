@@ -12,9 +12,6 @@
             <p class="text-muted mb-0">Reminders and updates for the receptionist.</p>
         </div>
         <div class="heading-actions">
-            <a href="{{ route('receptionist.notifications.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i> Create notification
-            </a>
             <form action="{{ route('receptionist.notifications.read-all') }}" method="POST">
                 @csrf
                 @method('PATCH')
@@ -36,9 +33,9 @@
                     <div>
                         <span>
                             <strong class="d-block text-body">
-                                {{ $notification->Title ?: 'Thông báo' }}
+                                {{ $notification->Title ?: 'Notification' }}
                                 @if (!$notification->IsRead)
-                                    <span class="badge text-bg-primary ms-1">Mới</span>
+                                    <span class="badge text-bg-primary ms-1">New</span>
                                 @endif
                                 @if ($notification->Type)
                                     <span class="badge text-bg-secondary ms-1">{{ $notification->Type }}</span>
@@ -46,7 +43,7 @@
                             </strong>
                             <span>{{ $notification->Message }}</span>
                             <span class="d-block text-muted small mt-1">
-                                {{ $notification->user->Username ?? 'Toàn hệ thống' }}
+                                {{ $notification->user->Username ?? 'System-wide' }}
                                 &middot;
                                 {{ $notification->CreatedAt ? \Illuminate\Support\Carbon::parse($notification->CreatedAt)->format('d/m/Y H:i') : '' }}
                             </span>

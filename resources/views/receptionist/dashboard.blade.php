@@ -64,7 +64,7 @@
         <div class="col-sm-6 col-xl-3">
             <div class="metric-card metric-danger">
                 <div class="metric-top">
-                    <span class="metric-label">Doanh thu hôm nay</span>
+                    <span class="metric-label">Today's Revenue</span>
                     <span class="metric-icon d-inline-flex align-items-center justify-content-center">
                         <i class="bi bi-cash-coin"></i>
                     </span>
@@ -73,6 +73,22 @@
                 <div class="metric-meta">Paid invoices</div>
             </div>
         </div>
+    </div>
+
+    <div class="row g-3 mt-1">
+        @if ($unconfirmedInvoices > 0)
+            <div class="col-12">
+                <div class="alert alert-warning d-flex justify-content-between align-items-center mb-0">
+                    <span>
+                        <i class="bi bi-exclamation-triangle"></i>
+                        {{ $unconfirmedInvoices }} invoice(s) have no payment method recorded - please confirm.
+                    </span>
+                    <a href="{{ route('receptionist.invoices.index', ['unconfirmed' => 1]) }}" class="btn btn-sm btn-outline-dark">
+                        Review
+                    </a>
+                </div>
+            </div>
+        @endif
     </div>
 
     <div class="row g-3 mt-1">
@@ -95,10 +111,10 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    <th>Giờ</th>
-                                    <th>Khách hàng</th>
-                                    <th>Dịch vụ</th>
-                                    <th>Trạng thái</th>
+                                    <th>Time</th>
+                                    <th>Customer</th>
+                                    <th>Service</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>

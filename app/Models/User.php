@@ -31,6 +31,7 @@ protected $fillable = [
     'RoleID',
     'IsActive',
     'DateBirth',
+    'Position',
 ];
 
     /**
@@ -55,5 +56,6 @@ public function getAuthPassword()
             'password' => 'hashed',
         ];
     }
+    
 }
 

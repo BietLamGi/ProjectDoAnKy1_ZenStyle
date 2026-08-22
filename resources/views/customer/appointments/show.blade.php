@@ -3,8 +3,7 @@
 @section('title', 'Appointment Details')
 
 @section('styles')
-    <link rel="stylesheet"
-          href="{{ asset('frontend/css/appointment-detail.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/appointment-detail.css') }}">
 @endsection
 
 @section('content')
@@ -14,9 +13,9 @@
     {{-- HEADER --}}
     <div class="appointment-detail-heading">
 
-        <span class="detail-eyebrow">
+        <!-- <span class="detail-eyebrow">
             ZENSTYLE SALON & SPA
-        </span>
+        </span> -->
 
         <h2>Appointment Details</h2>
 
@@ -106,52 +105,52 @@
 
             @foreach ($appointment->services as $appointmentService)
 
-                <div class="booking-service-item">
+            <div class="booking-service-item">
 
-                    <div class="booking-service-left">
+                <div class="booking-service-left">
 
-                        <div class="booking-service-icon">
-                            <i class="icon-scissors"></i>
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                {{ $appointmentService->service->ServiceName }}
-                            </h3>
-
-                            <p>
-                                {{ $appointmentService->service->Category }}
-                            </p>
-
-                            @if($appointmentService->service->DurationMinutes)
-
-                                <small>
-                                    <i class="icon-clock-o"></i>
-
-                                    {{ $appointmentService->service->DurationMinutes }}
-                                    minutes
-                                </small>
-
-                            @endif
-
-                        </div>
-
+                    <div class="booking-service-icon">
+                        <i class="icon-scissors"></i>
                     </div>
 
+                    <div>
 
-                    <div class="booking-service-price">
+                        <h3>
+                            {{ $appointmentService->service->ServiceName }}
+                        </h3>
 
-                        <span>Price</span>
+                        <p>
+                            {{ $appointmentService->service->Category }}
+                        </p>
 
-                        <strong>
-                            {{ number_format($appointmentService->UnitPrice) }}
-                            <small>VND</small>
-                        </strong>
+                        @if($appointmentService->service->DurationMinutes)
+
+                        <small>
+                            <i class="icon-clock-o"></i>
+
+                            {{ $appointmentService->service->DurationMinutes }}
+                            minutes
+                        </small>
+
+                        @endif
 
                     </div>
 
                 </div>
+
+
+                <div class="booking-service-price">
+
+                    <span>Price</span>
+
+                    <strong>
+                        {{ number_format($appointmentService->UnitPrice) }}
+                        <small>VND</small>
+                    </strong>
+
+                </div>
+
+            </div>
 
             @endforeach
 
@@ -161,21 +160,21 @@
         {{-- NOTES --}}
         @if ($appointment->Notes)
 
-            <div class="booking-notes">
+        <div class="booking-notes">
 
-                <div class="booking-section-title">
+            <div class="booking-section-title">
 
-                    <i class="icon-edit"></i>
+                <i class="icon-edit"></i>
 
-                    <h4>Additional Notes</h4>
-
-                </div>
-
-                <p>
-                    {{ $appointment->Notes }}
-                </p>
+                <h4>Additional Notes</h4>
 
             </div>
+
+            <p>
+                {{ $appointment->Notes }}
+            </p>
+
+        </div>
 
         @endif
 
@@ -194,36 +193,33 @@
 
 
         {{-- FOOTER --}}
-<div class="booking-detail-footer">
+        <div class="booking-detail-footer">
 
-    <a href="{{ route('appointments.my') }}"
-       class="back-appointments-btn">
+            <a href="{{ route('appointments.my') }}" class="back-appointments-btn">
 
-        <i class="icon-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
 
-        Back to My Appointments
+                Back to My Appointments
 
-    </a>
+            </a>
 
 
-    @if ($appointment->Status === 'Pending')
+            @if ($appointment->Status === 'Pending')
 
-        <form method="POST"
-              action="{{ route('customer.appointments.cancel', $appointment->AppointmentID) }}"
-              onsubmit="return confirm('Are you sure you want to cancel this appointment?');"
-              class="cancel-form">
+            <form method="POST" action="{{ route('customer.appointments.cancel', $appointment->AppointmentID) }}"
+                onsubmit="return confirm('Are you sure you want to cancel this appointment?');" class="cancel-form">
 
-            @csrf
+                @csrf
 
-            <button type="submit" class="cancel-appointment-btn">
-                Cancel appointment
-            </button>
+                <button type="submit" class="cancel-appointment-btn">
+                    Cancel appointment
+                </button>
 
-        </form>
+            </form>
 
-    @endif
+            @endif
 
-</div>
+        </div>
 
     </div>
 

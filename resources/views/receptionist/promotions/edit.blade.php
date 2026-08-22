@@ -25,7 +25,7 @@
 
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label">Tên chương trình <span class="text-danger">*</span></label>
+                    <label class="form-label">Program Name <span class="text-danger">*</span></label>
                     <input type="text" name="Title" class="form-control" maxlength="100" value="{{ old('Title', $promotion->Title) }}" required>
                 </div>
 
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Giá trị giảm <span class="text-danger">*</span></label>
+                    <label class="form-label">Discount Value <span class="text-danger">*</span></label>
                     <input type="number" name="DiscountValue" class="form-control" step="0.01" min="0" value="{{ old('DiscountValue', $promotion->DiscountValue) }}" required>
                 </div>
 
@@ -63,12 +63,12 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label">Ngày bắt đầu <span class="text-danger">*</span></label>
+                    <label class="form-label">Start Date <span class="text-danger">*</span></label>
                     <input type="date" name="StartDate" class="form-control" value="{{ old('StartDate', $promotion->StartDate?->format('Y-m-d')) }}" required>
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label">Ngày kết thúc <span class="text-danger">*</span></label>
+                    <label class="form-label">End Date <span class="text-danger">*</span></label>
                     <input type="date" name="EndDate" class="form-control" value="{{ old('EndDate', $promotion->EndDate?->format('Y-m-d')) }}" required>
                 </div>
 
@@ -80,7 +80,7 @@
 
             <div class="heading-actions mt-4">
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-check-lg"></i> Cập nhật
+                    <i class="bi bi-check-lg"></i> Update
                 </button>
             </div>
         </form>

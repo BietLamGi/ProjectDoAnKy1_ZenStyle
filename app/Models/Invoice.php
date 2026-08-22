@@ -14,12 +14,15 @@ class Invoice extends Model
 
     protected $fillable = [
         'AppointmentID',
+        'CustomerID',
         'InvoiceDate',
         'TotalAmount',
         'DiscountAmount',
         'FinalAmount',
         'PaymentMethod',
-        'CustomerID',
+        'ShippingName',
+        'ShippingPhone',
+        'ShippingAddress',
     ];
 
     protected $casts = [
@@ -28,13 +31,32 @@ class Invoice extends Model
         'DiscountAmount' => 'decimal:2',
         'FinalAmount' => 'decimal:2',
     ];
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class, 'CustomerID', 'CustomerID');
-    }
 
     public function appointment()
     {
-        return $this->belongsTo(Appointment::class, 'AppointmentID', 'AppointmentID');
+        return $this->belongsTo(
+            Appointment::class,
+            'AppointmentID',
+            'AppointmentID'
+        );
     }
+
+    public function details()
+    {
+        return $this->hasMany(
+            InvoiceDetail::class,
+            'InvoiceID',
+            'InvoiceID'
+        );
+    }
+    
+    public function customer()
+    {
+        return $this->belongsTo(
+            Customer::class,
+            'CustomerID',
+            'CustomerID'
+        );
+    }
+    
 }

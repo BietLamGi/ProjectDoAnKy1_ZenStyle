@@ -56,9 +56,20 @@
                                     <td class="fw-semibold">{{ $service->ServiceName }}</td>
                                     <td class="text-muted">{{ \Illuminate\Support\Str::limit($service->Description, 80) }}</td>
                                     @if ($type == '0')
-                                        <td>{{ $service->DurationMinutes }} phút</td>
+                                        <td>{{ $service->DurationMinutes }} min</td>
                                     @endif
-                                    <td class="text-end">{{ number_format($service->Price, 0, ',', '.') }}đ</td>
+                                    <td class="text-end">
+                                        @if ($service->activePromotion)
+                                            <span class="text-muted text-decoration-line-through d-block small">
+                                                {{ number_format($service->Price, 0, ',', '.') }}đ
+                                            </span>
+                                            <span class="fw-semibold text-danger">
+                                                {{ number_format($service->discounted_price, 0, ',', '.') }}đ
+                                            </span>
+                                        @else
+                                            {{ number_format($service->Price, 0, ',', '.') }}đ
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

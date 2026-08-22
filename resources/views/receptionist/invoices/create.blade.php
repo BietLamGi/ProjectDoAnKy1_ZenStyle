@@ -21,36 +21,48 @@
     <div class="panel">
         <div class="mb-3">
             <label class="form-label">Select appointment</label>
-            <select class="form-control" onchange="if(this.value){ window.location='{{ route('receptionist.invoices.create') }}?appointment_id='+this.value; }">
+            <select class="form-control"
+                onchange="if(this.value){ window.location='{{ route('receptionist.invoices.create') }}?appointment_id='+this.value; }">
                 <option value="">-- Select appointment to calculate automatically --</option>
                 @foreach ($appointments as $appointment)
-                    <option value="{{ $appointment->AppointmentID }}" @selected($selectedAppointment && $selectedAppointment->AppointmentID == $appointment->AppointmentID)>
-                        #{{ $appointment->AppointmentID }} - {{ $appointment->customer->FullName ?? 'N/A' }} ({{ $appointment->AppointmentDate }})
-                    </option>
+                <option value="{{ $appointment->AppointmentID }}" @selected($selectedAppointment &&
+                    $selectedAppointment->AppointmentID == $appointment->AppointmentID)>
+                    #{{ $appointment->AppointmentID }} - {{ $appointment->customer->FullName ?? 'N/A' }}
+                    ({{ $appointment->AppointmentDate?->format('d/m/Y') }})
+                </option>
                 @endforeach
             </select>
         </div>
 
         @if ($selectedAppointment)
-            <div class="blank-panel mb-3">
-                <div class="table-responsive">
-                    <table class="table table-sm align-middle mb-0">
-                        <thead><tr><th>Service</th><th>Qty</th><th>Unit price</th><th>Total</th></tr></thead>
-                        <tbody>
-                            @forelse ($selectedAppointment->services as $line)
-                                <tr>
-                                    <td>{{ $line->service->ServiceName ?? '—' }}</td>
-                                    <td>{{ $line->Quantity }}</td>
-                                    <td>{{ number_format($line->UnitPrice, 0, ',', '.') }}đ</td>
-                                    <td>{{ number_format($line->Quantity * $line->UnitPrice, 0, ',', '.') }}đ</td>
-                                </tr>
-                            @empty
-                                <tr><td colspan="4" class="text-muted">This appointment has no services yet.</td></tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+        <div class="blank-panel mb-3">
+            <div class="table-responsive">
+                <table class="table table-sm align-middle mb-0" id="servicesTable">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Qty</th>
+                            <th>Unit price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($selectedAppointment->services as $line)
+                        <tr data-line-total="{{ $line->Quantity * $line->UnitPrice }}">
+                            <td>{{ $line->service->ServiceName ?? '—' }}</td>
+                            <td>{{ $line->Quantity }}</td>
+                            <td>{{ number_format($line->UnitPrice, 0, ',', '.') }}đ</td>
+                            <td>{{ number_format($line->Quantity * $line->UnitPrice, 0, ',', '.') }}đ</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="4" class="text-muted">This appointment has no services yet.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
+        </div>
         @endif
 
         <form method="POST" action="{{ route('receptionist.invoices.store') }}">
@@ -62,10 +74,11 @@
                     <select name="AppointmentID" class="form-control" required>
                         <option value="">-- Select appointment --</option>
                         @foreach ($appointments as $appointment)
-                            <option value="{{ $appointment->AppointmentID }}"
-                                @selected(old('AppointmentID', $selectedAppointment->AppointmentID ?? null) == $appointment->AppointmentID)>
-                                #{{ $appointment->AppointmentID }} - {{ $appointment->customer->FullName ?? 'N/A' }} ({{ $appointment->AppointmentDate }})
-                            </option>
+                        <option value="{{ $appointment->AppointmentID }}" @selected(old('AppointmentID',
+                            $selectedAppointment->AppointmentID ?? null) == $appointment->AppointmentID)>
+                            #{{ $appointment->AppointmentID }} - {{ $appointment->customer->FullName ?? 'N/A' }}
+                            ({{ $appointment->AppointmentDate?->format('d/m/Y') }})
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -74,26 +87,48 @@
                     <label class="form-label">Payment method</label>
                     <select name="PaymentMethod" class="form-control">
                         <option value="">-- Select payment method --</option>
-                        <option value="Cash" @selected(old('PaymentMethod') == 'Cash')>Cash</option>
-                        <option value="Bank Transfer" @selected(old('PaymentMethod') == 'Bank Transfer')>Bank Transfer</option>
-                        <option value="Credit Card" @selected(old('PaymentMethod') == 'Credit Card')>Credit Card</option>
-                        <option value="E-Wallet" @selected(old('PaymentMethod') == 'E-Wallet')>E-Wallet</option>
+                        <option value="Cash" @selected(old('PaymentMethod')=='Cash' )>Cash</option>
+                        <option value="Bank Transfer" @selected(old('PaymentMethod')=='Bank Transfer' )>Bank Transfer
+                        </option>
+                        <option value="Credit Card" @selected(old('PaymentMethod')=='Credit Card' )>Credit Card</option>
+                        <option value="E-Wallet" @selected(old('PaymentMethod')=='E-Wallet' )>E-Wallet</option>
                     </select>
                 </div>
 
+                <div class="col-md-6">
+                    <label class="form-label">Apply promotion (optional)</label>
+                    <select id="promotionSelect" name="PromotionID" class="form-control">
+                        <option value="">-- No promotion --</option>
+                        @foreach ($activePromotions as $promotion)
+                        <option value="{{ $promotion->PromotionID }}" data-type="{{ $promotion->DiscountType }}"
+                            data-value="{{ $promotion->DiscountValue }}">
+                            {{ $promotion->Title }}
+                            ({{ $promotion->DiscountType === 'Percent' ? $promotion->DiscountValue . '%' : number_format($promotion->DiscountValue, 0, ',', '.') . 'đ' }})
+                            @if ($promotion->service) &middot; {{ $promotion->service->ServiceName }} @endif
+                        </option>
+                        @endforeach
+                    </select>
+                    <div class="form-text">Selecting a promotion will fill in the discount below. You can still adjust
+                        it manually.</div>
+                </div>
+
                 <div class="col-md-4">
-                    <label class="form-label">Subtotal <span class="text-danger">*</span></label>
-                    <input type="number" id="totalAmount" name="TotalAmount" class="form-control" step="0.01" min="0" value="{{ old('TotalAmount', $totalAmount) }}" required>
+                    <label class="form-label">Subtotal</label>
+                    <input type="number" id="totalAmount" class="form-control" step="0.01" min="0"
+                        value="{{ $totalAmount }}" readonly>
+                    <div class="form-text">Calculated automatically from the appointment's booked services.</div>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label">Discount <span class="text-danger">*</span></label>
-                    <input type="number" id="discountAmount" name="DiscountAmount" class="form-control" step="0.01" min="0" value="{{ old('DiscountAmount', 0) }}" required>
+                    <input type="number" id="discountAmount" name="DiscountAmount" class="form-control" step="0.01"
+                        min="0" value="{{ old('DiscountAmount', 0) }}" required readonly>
                 </div>
 
                 <div class="col-md-4">
                     <label class="form-label">Final amount <span class="text-danger">*</span></label>
-                    <input type="number" id="finalAmount" name="FinalAmount" class="form-control" step="0.01" min="0" value="{{ old('FinalAmount', $totalAmount) }}" required readonly>
+                    <input type="number" id="finalAmount" name="FinalAmount" class="form-control" step="0.01" min="0"
+                        value="{{ old('FinalAmount', $totalAmount) }}" required readonly>
                 </div>
             </div>
 
@@ -105,25 +140,65 @@
         </form>
     </div>
 
+
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const totalInput = document.getElementById('totalAmount');
-        const discountInput = document.getElementById('discountAmount');
-        const finalInput = document.getElementById('finalAmount');
+document.addEventListener('DOMContentLoaded', function() {
+    const totalInput = document.getElementById('totalAmount');
+    const discountInput = document.getElementById('discountAmount');
+    const finalInput = document.getElementById('finalAmount');
+    const promotionSelect = document.getElementById('promotionSelect');
 
-        function updateFinalAmount() {
-            const total = parseFloat(totalInput.value || 0);
-            const discount = parseFloat(discountInput.value || 0);
-            finalInput.value = Math.max(0, total - discount).toFixed(2);
-        }
+    function updateFinalAmount() {
+        const total = parseFloat(totalInput.value || 0);
+        const discount = parseFloat(discountInput.value || 0);
+        finalInput.value = Math.max(0, total - discount).toFixed(2);
+    }
 
-        if (totalInput && discountInput && finalInput) {
-            totalInput.addEventListener('input', updateFinalAmount);
-            discountInput.addEventListener('input', updateFinalAmount);
+    function applyPromotion() {
+        const option = promotionSelect.options[promotionSelect.selectedIndex];
+        const type = option ? option.getAttribute('data-type') : null;
+        const value = option ? parseFloat(option.getAttribute('data-value')) : 0;
+        const total = parseFloat(totalInput.value || 0);
+
+        if (!type) {
+            discountInput.value = '0.00';
             updateFinalAmount();
+            return;
         }
-    });
+
+        const discount = type === 'Percent' ? (total * value / 100) : value;
+        discountInput.value = Math.max(0, Math.min(discount, total)).toFixed(2);
+        updateFinalAmount();
+    }
+
+    function autoSumServices() {
+        const rows = document.querySelectorAll('#servicesTable tbody tr[data-line-total]');
+        if (!rows.length) {
+            return;
+        }
+
+        let sum = 0;
+        rows.forEach(function(row) {
+            sum += parseFloat(row.getAttribute('data-line-total')) || 0;
+        });
+
+        totalInput.value = sum.toFixed(2);
+        updateFinalAmount();
+    }
+
+    if (totalInput && discountInput && finalInput) {
+        totalInput.addEventListener('input', updateFinalAmount);
+        discountInput.addEventListener('input', updateFinalAmount);
+        // Subtotal is always driven by the services table — recompute on load
+        // so it can never go stale, no button needed.
+        autoSumServices();
+    }
+
+    if (promotionSelect) {
+        promotionSelect.addEventListener('change', applyPromotion);
+    }
+});
 </script>
 @endsection

@@ -9,12 +9,7 @@
         <div>
             <span class="eyebrow">Reception</span>
             <h1>Promotions</h1>
-            <p class="text-muted mb-0">Manage active promotion campaigns.</p>
-        </div>
-        <div class="heading-actions">
-            <a href="{{ route('receptionist.promotions.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i> Create promotion
-            </a>
+            <p class="text-muted mb-0">Look up active promotion campaigns to apply on invoices.</p>
         </div>
     </div>
 
@@ -33,7 +28,6 @@
                             <th>Discount</th>
                             <th>Period</th>
                             <th>Status</th>
-                            <th class="text-end">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,18 +53,6 @@
                                     @else
                                         <span class="badge text-bg-secondary">Paused</span>
                                     @endif
-                                </td>
-                                <td class="text-end">
-                                    <a href="{{ route('receptionist.promotions.edit', $promotion) }}" class="btn btn-sm btn-light" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form action="{{ route('receptionist.promotions.destroy', $promotion) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this promotion?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-light text-danger" title="Xoá">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach
