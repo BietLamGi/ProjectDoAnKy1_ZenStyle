@@ -25,6 +25,11 @@ class WorkSchedule extends Model
         'WorkDate' => 'date',
         'ActualCheckIn' => 'datetime',
         'ActualCheckOut' => 'datetime',
+        // WorkedHours is a COMPUTED column on the SQL Server side (derived
+        // from ActualCheckIn/ActualCheckOut) - intentionally NOT in
+        // $fillable. Never assign it via create()/update(); SQL Server
+        // rejects the write. It's still cast here so reading it back out
+        // (e.g. in views) returns a float.
         'WorkedHours' => 'float',
     ];
 

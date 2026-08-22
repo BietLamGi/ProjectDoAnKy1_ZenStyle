@@ -42,4 +42,8 @@ class Appointment extends Model
     {
         return $this->hasOne(Invoice::class, 'AppointmentID', 'AppointmentID');
     }
+    
+    protected $casts = [
+    'AppointmentDate' => 'date',
+];
 }

@@ -3,31 +3,37 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Service;
 
 class AppointmentService extends Model
 {
-   protected $table = 'AppointmentService';
+    protected $table = 'AppointmentService';
 
-protected $primaryKey = 'AppointmentServiceID';
+    protected $primaryKey = 'AppointmentServiceID';
 
-public $timestamps = false;
+    public $timestamps = false;
 
-protected $fillable = [
-    'AppointmentID',
-    'ServiceID',
-    'Quantity',
-    'UnitPrice',
-];
-// reception
-// public function appointment()
-//     {
-//         return $this->belongsTo(Appointment::class, 'AppointmentID', 'AppointmentID');
-//     }
+    protected $fillable = [
+        'AppointmentID',
+        'ServiceID',
+        'Quantity',
+        'UnitPrice',
+    ];
 
-//     public function service()
-//     {
-//         return $this->belongsTo(Service::class, 'ServiceID', 'ServiceID');
-//     }
+    public function appointment()
+    {
+        return $this->belongsTo(
+            Appointment::class,
+            'AppointmentID',
+            'AppointmentID'
+        );
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(
+            Service::class,
+            'ServiceID',
+            'ServiceID'
+        );
+    }
 }
-

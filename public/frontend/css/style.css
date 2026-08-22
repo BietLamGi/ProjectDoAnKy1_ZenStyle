@@ -9654,7 +9654,8 @@ h5,
     }
 }
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
-    color: #a28e56;
+    color: #a28e56 !important;
+    font-weight: 600;
 }
 .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
     border: none;
@@ -10134,368 +10135,309 @@ h5,
 
 .services:hover{
     transform:translateY(-5px);
-} */ */
+} */
+*/
 
 /*==============================
 HOME SERVICES
 ===============================*/
 
-.home-service-card{
+.home-service-card {
+    background: #fff;
 
-background:#fff;
+    border-radius: 20px;
 
-border-radius:20px;
+    overflow: hidden;
 
-overflow:hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 
-box-shadow:0 15px 35px rgba(0,0,0,.08);
+    transition: 0.35s;
 
-transition:.35s;
+    height: 100%;
 
-height:100%;
+    display: flex;
 
-display:flex;
-
-flex-direction:column;
-
+    flex-direction: column;
 }
 
-.home-service-card:hover{
+.home-service-card:hover {
+    transform: translateY(-10px);
 
-transform:translateY(-10px);
-
-box-shadow:0 20px 45px rgba(0,0,0,.12);
-
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
 }
 
-.home-image{
+.home-image {
+    height: 260px;
 
-height:260px;
-
-overflow:hidden;
-
+    overflow: hidden;
 }
 
-.home-image img{
+.home-image img {
+    width: 100%;
 
-width:100%;
+    height: 100%;
 
-height:100%;
+    object-fit: cover;
 
-object-fit:cover;
-
-transition:.5s;
-
+    transition: 0.5s;
 }
 
-.home-service-card:hover img{
-
-transform:scale(1.08);
-
+.home-service-card:hover img {
+    transform: scale(1.08);
 }
 
-.home-content{
+.home-content {
+    padding: 30px;
 
-padding:30px;
+    display: flex;
 
-display:flex;
+    flex-direction: column;
 
-flex-direction:column;
+    flex: 1;
 
-flex:1;
-
-text-align:center;
-
+    text-align: center;
 }
 
-.home-icon{
+.home-icon {
+    width: 75px;
 
-width:75px;
+    height: 75px;
 
-height:75px;
+    margin: auto;
 
-margin:auto;
+    margin-top: -65px;
 
-margin-top:-65px;
+    margin-bottom: 20px;
 
-margin-bottom:20px;
+    background: #fff;
 
-background:#fff;
+    border-radius: 50%;
 
-border-radius:50%;
+    display: flex;
 
-display:flex;
+    align-items: center;
 
-align-items:center;
+    justify-content: center;
 
-justify-content:center;
+    font-size: 32px;
 
-font-size:32px;
+    color: #e91e63;
 
-color:#E91E63;
-
-box-shadow:0 5px 18px rgba(0,0,0,.15);
-
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
 }
 
-.home-content h3{
+.home-content h3 {
+    font-weight: 700;
 
-font-weight:700;
-
-margin-bottom:15px;
-
+    margin-bottom: 15px;
 }
 
-.home-content p{
+.home-content p {
+    color: #666;
 
-color:#666;
+    flex: 1;
 
-flex:1;
-
-line-height:1.7;
-
+    line-height: 1.7;
 }
 
-.home-content .btn{
+.home-content .btn {
+    width: 170px;
 
-width:170px;
+    margin: auto;
 
-margin:auto;
+    margin-top: 20px;
 
-margin-top:20px;
+    border-radius: 30px;
 
-border-radius:30px;
-
-font-weight:600;
-
+    font-weight: 600;
 }
 
 /* ===========================
         SERVICES PAGE
 =========================== */
 
-.service-section{
-    padding:80px 0;
+.service-section {
+    padding: 80px 0;
 }
 
 .service-card,
-.product-card{
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 10px 28px rgba(0,0,0,.08);
-    transition:.35s;
-    display:flex;
-    flex-direction:column;
-    height:100%;
+.product-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    transition: 0.35s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .service-card:hover,
-.product-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 40px rgba(0,0,0,.12);
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
 /* ===========================
         IMAGE
 =========================== */
 
-.service-image{
+.service-image {
+    width: 100%;
 
-    width:100%;
+    height: 300px;
 
-    height:300px;
+    object-fit: contain;
 
-    object-fit:contain;
+    background: #fafafa;
 
-    background:#fafafa;
-
-    padding:15px;
-
+    padding: 15px;
 }
 
-.product-image{
+.product-image {
+    width: 100%;
 
-    width:100%;
+    height: 190px;
 
-    height:190px;
+    object-fit: contain;
 
-    object-fit:contain;
+    background: #fff;
 
-    background:#fff;
-
-    padding:12px;
-
+    padding: 12px;
 }
 
 /* ===========================
         BODY
 =========================== */
 
-.service-body{
+.service-body {
+    padding: 22px;
 
-    padding:22px;
+    display: flex;
 
-    display:flex;
+    flex-direction: column;
 
-    flex-direction:column;
-
-    flex:1;
-
+    flex: 1;
 }
 
-.service-title{
+.service-title {
+    font-size: 24px;
 
-    font-size:24px;
+    font-weight: 700;
 
-    font-weight:700;
+    margin-bottom: 12px;
 
-    margin-bottom:12px;
-
-    color:#333;
-
+    color: #333;
 }
 
-.product-title{
+.product-title {
+    font-size: 18px;
 
-    font-size:18px;
+    font-weight: 700;
 
-    font-weight:700;
-
-    margin-bottom:10px;
-
+    margin-bottom: 10px;
 }
 
-.service-desc{
+.service-desc {
+    color: #777;
 
-    color:#777;
+    font-size: 15px;
 
-    font-size:15px;
+    line-height: 1.7;
 
-    line-height:1.7;
-
-    flex:1;
-
+    flex: 1;
 }
 
-.service-price{
+.service-price {
+    color: #e91e63;
 
-    color:#E91E63;
+    font-size: 23px;
 
-    font-size:23px;
+    font-weight: bold;
 
-    font-weight:bold;
-
-    margin-top:18px;
-
+    margin-top: 18px;
 }
 
-.product-price{
+.product-price {
+    color: #e91e63;
 
-    color:#E91E63;
+    font-size: 21px;
 
-    font-size:21px;
+    font-weight: bold;
 
-    font-weight:bold;
-
-    margin-top:auto;
-
+    margin-top: auto;
 }
 
-.service-time{
+.service-time {
+    color: #999;
 
-    color:#999;
+    margin-top: 8px;
 
-    margin-top:8px;
-
-    margin-bottom:20px;
-
+    margin-bottom: 20px;
 }
 
 /* ===========================
         BUTTON
 =========================== */
 
-.book-btn{
+.book-btn {
+    width: 170px;
 
-    width:170px;
+    margin: 25px auto 0;
 
-    margin:25px auto 0;
+    display: block;
 
-    display:block;
+    border-radius: 30px;
 
-    border-radius:30px;
-
-    font-weight:600;
-
+    font-weight: 600;
 }
 
 /* ===========================
         TITLE
 =========================== */
 
-.section-divider{
-
-    margin:90px 0;
-
+.section-divider {
+    margin: 90px 0;
 }
 
-.heading-section h2{
-
-    font-weight:700;
-
+.heading-section h2 {
+    font-weight: 700;
 }
 
-.heading-section .subheading{
+.heading-section .subheading {
+    color: #e91e63;
 
-    color:#E91E63;
+    letter-spacing: 2px;
 
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
+    text-transform: uppercase;
 }
 
 /* ===========================
         RESPONSIVE
 =========================== */
 
-@media(max-width:991px){
+@media (max-width: 991px) {
+    .service-image {
+        height: 250px;
+    }
 
-.service-image{
-
-height:250px;
-
+    .product-image {
+        height: 170px;
+    }
 }
 
-.product-image{
+@media (max-width: 768px) {
+    .service-image {
+        height: 220px;
+    }
 
-height:170px;
+    .product-image {
+        height: 150px;
+    }
 
-}
-
-}
-
-@media(max-width:768px){
-
-.service-image{
-
-height:220px;
-
-}
-
-.product-image{
-
-height:150px;
-
-}
-
-.service-title{
-
-font-size:20px;
-
-}
-
+    .service-title {
+        font-size: 20px;
+    }
 }
 
 .work-category span a {
@@ -11933,7 +11875,6 @@ textarea.form-control {
    Beige / Gold Theme
 ===================================================== */
 
-
 /* =========================
    PAGE
 ========================= */
@@ -11942,17 +11883,10 @@ textarea.form-control {
     min-height: 100vh;
     padding: 65px 0 90px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f7f2e8 0%,
-            #fcfaf6 50%,
-            #f1e7d4 100%
-        );
+    background: linear-gradient(135deg, #f7f2e8 0%, #fcfaf6 50%, #f1e7d4 100%);
 
     color: #3d382f;
 }
-
 
 /* =========================
    HEADER
@@ -11979,7 +11913,6 @@ textarea.form-control {
     font-weight: 500;
 }
 
-
 /* =========================
    MAIN CARD
 ========================= */
@@ -11997,10 +11930,8 @@ textarea.form-control {
 
     overflow: hidden;
 
-    box-shadow:
-        0 18px 45px rgba(85, 70, 45, 0.12);
+    box-shadow: 0 18px 45px rgba(85, 70, 45, 0.12);
 }
-
 
 /* =========================
    LEFT SIDEBAR
@@ -12015,16 +11946,10 @@ textarea.form-control {
 
     text-align: center;
 
-    background:
-        linear-gradient(
-            180deg,
-            #f1e7d3 0%,
-            #eadcc3 100%
-        );
+    background: linear-gradient(180deg, #f1e7d3 0%, #eadcc3 100%);
 
     border-right: 1px solid #e3d5bc;
 }
-
 
 /* Avatar */
 
@@ -12048,14 +11973,12 @@ textarea.form-control {
 
     border: 1px solid #e2d3b8;
 
-    box-shadow:
-        0 8px 22px rgba(90, 70, 35, 0.12);
+    box-shadow: 0 8px 22px rgba(90, 70, 35, 0.12);
 }
 
 .profile-avatar i {
     line-height: 1;
 }
-
 
 /* Username */
 
@@ -12070,7 +11993,6 @@ textarea.form-control {
     word-break: break-word;
 }
 
-
 /* Email */
 
 .profile-sidebar p {
@@ -12083,7 +12005,6 @@ textarea.form-control {
 
     word-break: break-word;
 }
-
 
 /* =========================
    MEMBER BADGE
@@ -12115,7 +12036,6 @@ textarea.form-control {
     color: #b18b4e;
     font-size: 13px;
 }
-
 
 /* =========================
    EDIT BUTTON
@@ -12157,10 +12077,8 @@ textarea.form-control {
 
     transform: translateY(-1px);
 
-    box-shadow:
-        0 5px 15px rgba(120, 90, 40, 0.15);
+    box-shadow: 0 5px 15px rgba(120, 90, 40, 0.15);
 }
-
 
 /* =========================
    RIGHT CONTENT
@@ -12171,7 +12089,6 @@ textarea.form-control {
 
     background: #fffdf9;
 }
-
 
 /* =========================
    SECTION
@@ -12184,7 +12101,6 @@ textarea.form-control {
 .profile-section:last-child {
     margin-bottom: 0;
 }
-
 
 /* =========================
    SECTION TITLE
@@ -12215,7 +12131,6 @@ textarea.form-control {
     font-size: 13px;
     font-weight: 500;
 }
-
 
 /* =========================
    PERSONAL INFORMATION
@@ -12259,7 +12174,6 @@ textarea.form-control {
     word-break: break-word;
 }
 
-
 /* =========================
    ACCOUNT MENU
 ========================= */
@@ -12293,7 +12207,6 @@ textarea.form-control {
         box-shadow 0.25s ease;
 }
 
-
 /* Hover */
 
 .account-menu:hover {
@@ -12307,10 +12220,8 @@ textarea.form-control {
 
     transform: translateX(3px);
 
-    box-shadow:
-        0 6px 18px rgba(100, 80, 45, 0.08);
+    box-shadow: 0 6px 18px rgba(100, 80, 45, 0.08);
 }
-
 
 /* =========================
    MENU ICON
@@ -12340,7 +12251,6 @@ textarea.form-control {
 .menu-icon i {
     line-height: 1;
 }
-
 
 /* =========================
    MENU CONTENT
@@ -12375,7 +12285,6 @@ textarea.form-control {
     line-height: 1.4;
 }
 
-
 /* =========================
    ARROW
 ========================= */
@@ -12395,7 +12304,6 @@ textarea.form-control {
 .account-menu:hover .menu-arrow {
     transform: translateX(4px);
 }
-
 
 /* =========================
    LOGOUT
@@ -12427,13 +12335,11 @@ form {
     border-color: #d9bda5;
 }
 
-
 /* =========================
    RESPONSIVE - TABLET
 ========================= */
 
 @media (max-width: 991px) {
-
     .profile-page {
         padding: 45px 0 70px;
     }
@@ -12455,13 +12361,11 @@ form {
     }
 }
 
-
 /* =========================
    RESPONSIVE - MOBILE
 ========================= */
 
 @media (max-width: 767px) {
-
     .profile-page {
         padding: 35px 15px 60px;
     }
@@ -12516,15 +12420,6 @@ form {
     .menu-content span {
         font-size: 12px;
     }
-}
-
-/* NAVBAR */
-
-.ftco_navbar.scrolled {
-    position: relative !important;
-    top: auto !important;
-    bottom: auto !important;
-    width: 100% !important;
 }
 
 .booking-back {
@@ -12649,6 +12544,55 @@ form {
     font-size: 14px;
 }
 
+.product-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.product-actions form {
+    margin: 0;
+}
+
+.add-cart-btn,
+.buy-now-btn {
+    min-width: 125px;
+    height: 42px;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-cart-btn {
+    background: #f5eeee;
+    color: #555;
+}
+
+.add-cart-btn:hover {
+    background: #eadcdc;
+}
+
+.buy-now-btn {
+    background-color: #e8a1b9;
+    border: 1px solid #e8a0b5;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.buy-now-btn:hover {
+    background-color: #c96f8c;
+    border-color: #c96f8c;
+    color: #040505;
+    font-weight: 800;
+}
 
 /* =========================================
    SHOPPING CART
@@ -12659,7 +12603,6 @@ form {
     margin: 0 auto;
     padding: 60px 30px 90px;
 }
-
 
 /* HEADER */
 
@@ -12705,7 +12648,6 @@ form {
     font-size: 14px;
 }
 
-
 /* MAIN LAYOUT */
 
 .cart-layout {
@@ -12714,7 +12656,6 @@ form {
     gap: 45px;
     align-items: start;
 }
-
 
 /* PRODUCT */
 
@@ -12729,7 +12670,6 @@ form {
 
     border-bottom: 1px solid #eee;
 }
-
 
 /* IMAGE */
 
@@ -12768,7 +12708,6 @@ form {
     font-size: 22px;
 }
 
-
 /* PRODUCT INFO */
 
 .cart-product-info {
@@ -12792,7 +12731,6 @@ form {
     color: #aaa;
 }
 
-
 /* QUANTITY */
 
 .cart-quantity {
@@ -12804,7 +12742,6 @@ form {
     text-align: center;
 }
 
-
 /* TOTAL */
 
 .cart-item-total {
@@ -12815,7 +12752,6 @@ form {
 
     text-align: right;
 }
-
 
 /* SUMMARY */
 
@@ -12854,7 +12790,6 @@ form {
     font-size: 14px;
 }
 
-
 /* CHECKOUT */
 
 .cart-checkout-btn {
@@ -12879,7 +12814,6 @@ form {
 .cart-checkout-btn:hover {
     background: #9f854c;
 }
-
 
 /* EMPTY CART */
 
@@ -12940,11 +12874,9 @@ form {
     text-decoration: none;
 }
 
-
 /* RESPONSIVE */
 
 @media (max-width: 768px) {
-
     .cart-page {
         padding: 40px 20px 70px;
     }
@@ -12979,9 +12911,7 @@ form {
         padding-left: 85px;
         text-align: left;
     }
-
 }
-
 
 /* ========================================
    CHECKOUT PAGE
@@ -12999,7 +12929,6 @@ form {
     margin: auto;
     padding: 0 25px;
 }
-
 
 /* ========================================
    HEADER
@@ -13032,7 +12961,6 @@ form {
     font-weight: 500;
 }
 
-
 /* ========================================
    BACK BUTTON
 ======================================== */
@@ -13059,7 +12987,6 @@ form {
     transform: translateX(-3px);
 }
 
-
 /* ========================================
    MAIN CARD
 ======================================== */
@@ -13073,7 +13000,6 @@ form {
 
     box-shadow: 0 10px 30px rgba(80, 65, 40, 0.08);
 }
-
 
 /* ========================================
    CARD HEADER
@@ -13104,7 +13030,6 @@ form {
     font-weight: 500;
 }
 
-
 /* ========================================
    FORM
 ======================================== */
@@ -13126,7 +13051,6 @@ form {
 .checkout-field label span {
     color: #b88a3b;
 }
-
 
 /* ========================================
    INPUT
@@ -13197,7 +13121,6 @@ form {
     padding: 45px 15px 80px;
 }
 
-
 /* ========================================
    BACK TO CART
 ======================================== */
@@ -13227,7 +13150,6 @@ form {
 .checkout-back i {
     font-size: 13px;
 }
-
 
 /* ========================================
    HEADER
@@ -13264,7 +13186,6 @@ form {
     font-weight: 500;
 }
 
-
 /* ========================================
    CHECKOUT CARD
 ======================================== */
@@ -13279,7 +13200,6 @@ form {
 
     box-shadow: 0 8px 30px rgba(70, 55, 30, 0.06);
 }
-
 
 /* ========================================
    CARD HEADER
@@ -13305,7 +13225,6 @@ form {
     font-weight: 500;
 }
 
-
 /* ========================================
    CHECKOUT FIELD
 ======================================== */
@@ -13329,7 +13248,6 @@ form {
     color: #c05a4a;
     font-weight: 700;
 }
-
 
 /* ========================================
    INPUT / TEXTAREA / SELECT
@@ -13378,7 +13296,6 @@ form {
     box-shadow: 0 0 0 3px rgba(168, 141, 80, 0.08);
 }
 
-
 /* ========================================
    PHONE + EMAIL
 ======================================== */
@@ -13391,7 +13308,6 @@ form {
 .checkout-row .checkout-field {
     flex: 1;
 }
-
 
 /* ========================================
    SELECT
@@ -13424,7 +13340,6 @@ form {
     pointer-events: none;
 }
 
-
 /* ========================================
    CHECKOUT SECTION
 ======================================== */
@@ -13454,7 +13369,6 @@ form {
     font-weight: 500;
 }
 
-
 /* ========================================
    FIELD HINT
 ======================================== */
@@ -13468,7 +13382,6 @@ form {
     font-size: 11px;
     font-weight: 500;
 }
-
 
 /* ========================================
    PAYMENT
@@ -13517,7 +13430,6 @@ form {
     flex-shrink: 0;
 }
 
-
 /* ========================================
    PAYMENT ICON
 ======================================== */
@@ -13538,7 +13450,6 @@ form {
     color: #9a7d3e;
     font-size: 16px;
 }
-
 
 /* ========================================
    PAYMENT INFO
@@ -13566,7 +13477,6 @@ form {
     font-weight: 500;
 }
 
-
 /* ========================================
    SELECTED PAYMENT
 ======================================== */
@@ -13577,7 +13487,6 @@ form {
 
     box-shadow: 0 0 0 2px rgba(168, 141, 80, 0.08);
 }
-
 
 /* ========================================
    ERROR
@@ -13592,7 +13501,6 @@ form {
     font-size: 12px;
     font-weight: 500;
 }
-
 
 /* ========================================
    ACTION
@@ -13647,13 +13555,11 @@ form {
     font-size: 12px;
 }
 
-
 /* ========================================
    RESPONSIVE
 ======================================== */
 
 @media (max-width: 768px) {
-
     .checkout-container {
         padding: 35px 15px 60px;
     }
@@ -13682,10 +13588,9 @@ form {
     .checkout-submit {
         width: 100%;
     }
-
 }
 
-// css for update sl
+/*  css for update sl */
 /* QUANTITY */
 
 .cart-quantity {
@@ -13721,7 +13626,7 @@ form {
     font-size: 18px;
     line-height: 1;
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .quantity-btn:hover:not(:disabled) {
@@ -13730,7 +13635,7 @@ form {
 }
 
 .quantity-btn:disabled {
-    opacity: .4;
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
@@ -13740,7 +13645,6 @@ form {
     font-weight: 600;
     color: #3f3a32;
 }
-
 
 /* REMOVE */
 
@@ -13768,7 +13672,7 @@ form {
 
     cursor: pointer;
 
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .cart-remove-btn:hover {
@@ -13917,7 +13821,6 @@ form {
     padding: 0 20px;
 }
 
-
 /* ================================
    HEADER
 ================================ */
@@ -13945,7 +13848,7 @@ form {
 
     text-decoration: none;
 
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .cart-back-btn:hover {
@@ -13968,7 +13871,6 @@ form {
     color: #777066;
     font-size: 15px;
 }
-
 
 /* ================================
    CART LAYOUT
@@ -14011,7 +13913,7 @@ form {
     background: #fff;
 
     text-decoration: none;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .cart-back-btn:hover {
@@ -14034,7 +13936,6 @@ form {
     font-size: 14px;
 }
 
-
 /* =================================
    CART LAYOUT
 ================================= */
@@ -14049,7 +13950,6 @@ form {
     gap: 25px;
     align-items: start;
 }
-
 
 /* =================================
    CART ITEM
@@ -14077,9 +13977,8 @@ form {
     padding: 16px 18px;
     margin-bottom: 14px;
 
-    box-shadow: 0 3px 12px rgba(80, 65, 40, .04);
+    box-shadow: 0 3px 12px rgba(80, 65, 40, 0.04);
 }
-
 
 /* =================================
    PRODUCT IMAGE
@@ -14114,7 +14013,6 @@ form {
     font-size: 23px;
 }
 
-
 /* =================================
    PRODUCT INFO
 ================================= */
@@ -14140,7 +14038,6 @@ form {
     font-size: 14px;
     font-weight: 600;
 }
-
 
 /* =================================
    QUANTITY
@@ -14193,7 +14090,7 @@ form {
     font-weight: 600;
 
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .quantity-btn:hover:not(:disabled) {
@@ -14202,7 +14099,7 @@ form {
 }
 
 .quantity-btn:disabled {
-    opacity: .35;
+    opacity: 0.35;
     cursor: not-allowed;
 }
 
@@ -14216,7 +14113,6 @@ form {
     font-size: 14px;
     font-weight: 700;
 }
-
 
 /* =================================
    PRICE / SUBTOTAL
@@ -14235,8 +14131,6 @@ form {
 
     font-size: 12px;
 }
-
-
 
 /* =================================
    REMOVE
@@ -14262,14 +14156,13 @@ form {
 
     cursor: pointer;
 
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .cart-remove-btn:hover {
     color: #b45c52;
     transform: scale(1.08);
 }
-
 
 /* =================================
    ORDER SUMMARY
@@ -14286,7 +14179,7 @@ form {
 
     padding: 22px;
 
-    box-shadow: 0 4px 15px rgba(80, 65, 40, .05);
+    box-shadow: 0 4px 15px rgba(80, 65, 40, 0.05);
 }
 
 .cart-summary h4 {
@@ -14341,7 +14234,6 @@ form {
     font-weight: 700;
 }
 
-
 /* =================================
    CHECKOUT BUTTON
 ================================= */
@@ -14364,13 +14256,12 @@ form {
 
     cursor: pointer;
 
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .cart-checkout-btn:hover {
     background: #8f773f;
 }
-
 
 /* =================================
    EMPTY CART
@@ -14389,7 +14280,7 @@ form {
     border: 1px solid #eee5d6;
     border-radius: 15px;
 
-    box-shadow: 0 4px 15px rgba(80, 65, 40, .04);
+    box-shadow: 0 4px 15px rgba(80, 65, 40, 0.04);
 }
 
 .cart-empty-icon {
@@ -14438,7 +14329,7 @@ form {
 
     text-decoration: none;
 
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .cart-continue-btn:hover {
@@ -14447,13 +14338,11 @@ form {
     text-decoration: none;
 }
 
-
 /* =================================
    TABLET
 ================================= */
 
 @media (max-width: 992px) {
-
     .cart-layout {
         grid-template-columns: 1fr;
     }
@@ -14463,13 +14352,11 @@ form {
     }
 }
 
-
 /* =================================
    MOBILE
 ================================= */
 
 @media (max-width: 768px) {
-
     .cart-header {
         padding: 0 15px;
     }
@@ -14510,13 +14397,11 @@ form {
     }
 }
 
-
 /* =================================
    SMALL MOBILE
 ================================= */
 
 @media (max-width: 480px) {
-
     .cart-header-text h2 {
         font-size: 23px;
     }
@@ -14589,7 +14474,6 @@ form {
     white-space: nowrap;
 }
 
-
 /* SUMMARY PRODUCT */
 
 .cart-summary-product {
@@ -14617,4 +14501,140 @@ form {
 .cart-summary-product small {
     color: #999;
     margin-left: 4px;
+}
+
+
+/* =========================================================
+   NAVBAR - ALIGNMENT
+   ========================================================= */
+
+@media (min-width: 992px) {
+
+    /* Tất cả nav item cùng chiều cao */
+    .ftco-navbar-light .navbar-nav {
+        align-items: center;
+    }
+
+    .ftco-navbar-light .navbar-nav > .nav-item {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Book Appointment */
+    .ftco-navbar-light .navbar-nav .navbar-book-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 42px;
+        padding: 0 18px !important;
+
+        margin-left: 10px;
+        margin-right: 10px;
+
+        border: 1px solid #a28e56;
+        border-radius: 4px;
+
+        background: #a28e56 !important;
+        color: #fff !important;
+
+        text-transform: none;
+        font-weight: 500;
+    }
+
+    .ftco-navbar-light .navbar-nav .navbar-book-btn:hover {
+        background: #ffffff !important;
+        color: #a28e56 !important;
+        border-color: #a28e56 !important;
+    }
+
+
+    /* Search + Cart */
+    .ftco-navbar-light .navbar-nav .navbar-icon-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 42px;
+        min-width: 42px;
+
+        padding: 0 12px !important;
+
+        color: rgba(0, 0, 0, 0.7) !important;
+    }
+
+    .ftco-navbar-light .navbar-nav .navbar-icon-link:hover {
+        color: #a28e56 !important;
+    }
+
+
+    /* Icon search/cart */
+    .navbar-icon-link i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 16px;
+        line-height: 1;
+    }
+
+
+    /* User */
+    .ftco-navbar-light .navbar-nav .navbar-user-link {
+        display: flex;
+        align-items: center;
+
+        min-height: 42px;
+
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .navbar-user-link .icon-user {
+        display: inline-flex;
+        align-items: center;
+
+        margin-right: 6px;
+    }
+
+    .ftco-navbar-light .navbar-nav .navbar-user-link:hover {
+        color: #a28e56 !important;
+    }
+
+    /* Khi đang ở Profile */
+    .ftco-navbar-light .navbar-nav .navbar-user-link.active,
+    .ftco-navbar-light .navbar-nav .nav-item.active .navbar-user-link {
+        color: #a28e56 !important;
+    }
+
+
+    /* Cart count */
+    .navbar-icon-link.cart-link {
+        position: relative;
+    }
+
+    .navbar-icon-link .cart-count {
+        position: absolute;
+
+        top: 5px;
+        right: 4px;
+
+        min-width: 16px;
+        height: 16px;
+
+        padding: 0 4px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: #a28e56;
+        color: #fff;
+
+        font-size: 9px;
+        line-height: 16px;
+        font-weight: 600;
+    }
 }

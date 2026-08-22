@@ -3,20 +3,21 @@
 namespace App\Http\Controllers\Receptionist;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     /**
-     * Bảng giá dịch vụ & sản phẩm để lễ tân tra cứu khi tư vấn/checkout.
+     * Service & product price list for the receptionist to look up when consulting customers or checking out.
      */
     public function index(Request $request)
     {
-        $type = $request->query('type', '0'); // 0 = dịch vụ, 1 = sản phẩm
+        $type = $request->query('type', '0'); // 0 = service, 1 = product
         $keyword = $request->query('q');
 
-        $services = Service::query()
+        $services = Service::with('activePromotion')
             ->where('ServiceType', $type)
             ->when($keyword, fn ($query) => $query->where('ServiceName', 'like', "%{$keyword}%"))
             ->orderBy('Category')

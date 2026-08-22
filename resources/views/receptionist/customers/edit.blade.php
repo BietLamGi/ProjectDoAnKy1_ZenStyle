@@ -39,14 +39,6 @@
                     <input type="date" name="DOB" class="form-control" value="{{ old('DOB', $customer->DOB) }}">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Membership tier</label>
-                    <select name="MembershipTier" class="form-control">
-                        @foreach (['Normal', 'Silver', 'Gold', 'VIP'] as $tier)
-                            <option value="{{ $tier }}" @selected(old('MembershipTier', $customer->MembershipTier) === $tier)>{{ $tier }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-6">
                     <label class="form-label">Allergies (optional)</label>
                     <input type="text" name="Allergies" class="form-control" value="{{ old('Allergies', $customer->Allergies) }}">
                 </div>

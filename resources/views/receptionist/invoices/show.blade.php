@@ -12,6 +12,11 @@
             <p class="text-muted mb-0">{{ $invoice->InvoiceDate?->format('d/m/Y H:i') }}</p>
         </div>
         <div class="heading-actions">
+            @if ($invoice->AppointmentID)
+                <a href="{{ route('receptionist.appointments.show', $invoice->AppointmentID) }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-calendar-check"></i> View appointment
+                </a>
+            @endif
             <a href="{{ route('receptionist.invoices.edit', $invoice) }}" class="btn btn-primary">
                 <i class="bi bi-pencil"></i> Edit
             </a>
@@ -21,6 +26,13 @@
         </div>
     </div>
 
+    @if ($invoice->PaymentMethod)
+        <div class="alert alert-success py-2 px-3">
+            <i class="bi bi-check-circle"></i>
+            Payment completed.
+        </div>
+    @endif
+
     <div class="row g-3">
         <div class="col-lg-5">
             <div class="panel">
@@ -29,8 +41,27 @@
                     <div><span>Customer</span><strong>{{ $invoice->customer->FullName ?? ($invoice->appointment->customer->FullName ?? 'N/A') }}</strong></div>
                     <div><span>Phone</span><strong>{{ $invoice->customer->Phone ?? ($invoice->appointment->customer->Phone ?? '—') }}</strong></div>
                     <div><span>Appointment</span><strong>#{{ $invoice->AppointmentID }}</strong></div>
-                    <div><span>Payment method</span><strong>{{ $invoice->PaymentMethod ?: '—' }}</strong></div>
+                    <div><span>Payment method</span><strong>{{ $invoice->PaymentMethod ?: 'Not recorded yet' }}</strong></div>
                 </div>
+
+                @unless ($invoice->PaymentMethod)
+                    <div class="alert alert-warning mt-3 mb-0 py-2 px-3">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        No payment method recorded for this invoice yet.
+                    </div>
+                    <form action="{{ route('receptionist.invoices.confirm-payment', $invoice) }}" method="POST" class="d-flex gap-2 mt-2">
+                        @csrf
+                        @method('PATCH')
+                        <select name="PaymentMethod" class="form-control" required>
+                            <option value="">-- Select payment method --</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="E-Wallet">E-Wallet</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary text-nowrap">Confirm</button>
+                    </form>
+                @endunless
             </div>
         </div>
 
@@ -41,12 +72,12 @@
                     <table class="table align-middle">
                         <thead><tr><th>Service</th><th>Qty</th><th>Unit price</th><th>Total</th></tr></thead>
                         <tbody>
-                            @forelse ($invoice->appointment->services ?? [] as $line)
+                            @forelse ($details ?? [] as $line)
                                 <tr>
                                     <td>{{ $line->service->ServiceName ?? '—' }}</td>
                                     <td>{{ $line->Quantity }}</td>
                                     <td>{{ number_format($line->UnitPrice, 0, ',', '.') }}đ</td>
-                                    <td>{{ number_format($line->Quantity * $line->UnitPrice, 0, ',', '.') }}đ</td>
+                                    <td>{{ number_format($line->Subtotal, 0, ',', '.') }}đ</td>
                                 </tr>
                             @empty
                                 <tr><td colspan="4" class="text-muted">No service data available.</td></tr>

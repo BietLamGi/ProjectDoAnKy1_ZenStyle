@@ -40,16 +40,23 @@
                     <label class="form-label">Work date <span class="text-danger">*</span></label>
                     <input type="date" name="WorkDate" class="form-control" value="{{ old('WorkDate', $workSchedule->WorkDate?->format('Y-m-d')) }}" required>
                 </div>
+<div class="col-md-6">
+    <label class="form-label">Shift start time <span class="text-danger">*</span></label>
+    <input type="time"
+           name="ShiftStart"
+           class="form-control"
+           value="{{ old('ShiftStart', substr((string) $workSchedule->ShiftStart, 0, 5)) }}"
+           required>
+</div>
 
-                <div class="col-md-6">
-                    <label class="form-label">Shift start time <span class="text-danger">*</span></label>
-                    <input type="time" name="ShiftStart" class="form-control" value="{{ old('ShiftStart', $workSchedule->ShiftStart) }}" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label class="form-label">Shift end time <span class="text-danger">*</span></label>
-                    <input type="time" name="ShiftEnd" class="form-control" value="{{ old('ShiftEnd', $workSchedule->ShiftEnd) }}" required>
-                </div>
+<div class="col-md-6">
+    <label class="form-label">Shift end time <span class="text-danger">*</span></label>
+    <input type="time"
+           name="ShiftEnd"
+           class="form-control"
+           value="{{ old('ShiftEnd', substr((string) $workSchedule->ShiftEnd, 0, 5)) }}"
+           required>
+</div>
 
                 <div class="col-md-6">
                     <label class="form-label">Actual check-in</label>
@@ -71,9 +78,9 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label">Số giờ làm</label>
-                    <input type="text" class="form-control" value="{{ $workSchedule->WorkedHours !== null ? number_format($workSchedule->WorkedHours, 2) . ' giờ' : '—' }}" disabled>
-                    <small class="text-muted">Số giờ làm được hệ thống tự tính.</small>
+                    <label class="form-label">Hours Worked</label>
+                    <input type="text" class="form-control" value="{{ $workSchedule->WorkedHours !== null ? number_format($workSchedule->WorkedHours, 2) . ' h' : '—' }}" disabled>
+                    <small class="text-muted">Hours worked are calculated automatically by the system.</small>
                 </div>
             </div>
 
